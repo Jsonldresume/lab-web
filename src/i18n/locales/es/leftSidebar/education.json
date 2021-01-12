@@ -1,0 +1,11 @@
+{
+  "name": {
+    "label": "Nombre"
+  },
+  "major": {
+    "label": "Carrera"
+  },
+  "grade": {
+    "label": "Calificación"
+  }
+}

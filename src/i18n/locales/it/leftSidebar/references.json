@@ -1,0 +1,14 @@
+{
+  "name": {
+    "label": "Nome"
+  },
+  "position": {
+    "label": "Posizione"
+  },
+  "phone": {
+    "label": "Numero di telefono"
+  },
+  "email": {
+    "label": "Indirizzo email"
+  }
+}

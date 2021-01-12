@@ -1,0 +1,11 @@
+{
+  "key": {
+    "label": "Naam"
+  },
+  "level": {
+    "label": "Taalvaardigheid"
+  },
+  "rating": {
+    "label": "Waardering"
+  }
+}

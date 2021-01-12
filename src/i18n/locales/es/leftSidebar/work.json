@@ -1,0 +1,8 @@
+{
+  "name": {
+    "label": "Nombre"
+  },
+  "role": {
+    "label": "Puesto"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Kolory",
+  "colorOptions": "Opcje kolorów",
+  "primaryColor": "Kolor podstawowy",
+  "accentColor": "Kolor dodatkowy",
+  "clipboardCopyAction": "{{color}} został skopiowany do schowka."
+}

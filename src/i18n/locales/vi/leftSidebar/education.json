@@ -1,0 +1,11 @@
+{
+  "name": {
+    "label": "Tên"
+  },
+  "major": {
+    "label": "Ngành"
+  },
+  "grade": {
+    "label": "Điểm"
+  }
+}

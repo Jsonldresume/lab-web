@@ -1,0 +1,11 @@
+{
+  "key": {
+    "label": "Nazwa"
+  },
+  "level": {
+    "label": "Poziom"
+  },
+  "rating": {
+    "label": "Ocena"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": {
+    "label": "Navn"
+  },
+  "position": {
+    "label": "Jobtitel"
+  },
+  "phone": {
+    "label": "Telefonnummer"
+  },
+  "email": {
+    "label": "E-mailadresse"
+  }
+}

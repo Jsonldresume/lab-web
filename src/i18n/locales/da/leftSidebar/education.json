@@ -1,0 +1,11 @@
+{
+  "name": {
+    "label": "Navn"
+  },
+  "major": {
+    "label": "Centralfag"
+  },
+  "grade": {
+    "label": "Karakter"
+  }
+}

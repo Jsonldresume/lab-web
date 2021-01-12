@@ -1,0 +1,7 @@
+{
+  "title": "الألوان",
+  "colorOptions": "خيارات اللون",
+  "primaryColor": "اللون الأساسي",
+  "accentColor": "اللون الثانوي",
+  "clipboardCopyAction": "تم نسخ {{color}}."
+}

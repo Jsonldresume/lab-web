@@ -1,0 +1,11 @@
+{
+  "key": {
+    "label": "Nom"
+  },
+  "level": {
+    "label": "Niveau"
+  },
+  "rating": {
+    "label": "Évaluation"
+  }
+}

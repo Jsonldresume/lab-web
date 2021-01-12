@@ -1,0 +1,7 @@
+{
+  "title": "Colores",
+  "colorOptions": "Opciones de Color",
+  "primaryColor": "Color principal",
+  "accentColor": "Color secundario",
+  "clipboardCopyAction": "El color {{color}} ha sido copiado al portapapeles."
+}

@@ -1,0 +1,11 @@
+{
+  "name": {
+    "label": "Instituição"
+  },
+  "major": {
+    "label": "Área de estudo"
+  },
+  "grade": {
+    "label": "Nota"
+  }
+}

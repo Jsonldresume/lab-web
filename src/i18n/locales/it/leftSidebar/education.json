@@ -1,0 +1,11 @@
+{
+  "name": {
+    "label": "Nome"
+  },
+  "major": {
+    "label": "Grande"
+  },
+  "grade": {
+    "label": "Voto"
+  }
+}
