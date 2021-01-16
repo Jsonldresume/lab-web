@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import PageContext from '../../../context/PageContext';
 import { importJson } from '../../../utils';
 
+import { JsontoJsonld } from '../../../jsonld';
+
 const ActionsTab = ({ data, theme, dispatch }) => {
   const pageContext = useContext(PageContext);
   const { setPrintDialogOpen } = pageContext;
@@ -17,6 +19,15 @@ const ActionsTab = ({ data, theme, dispatch }) => {
   const exportToJson = () => {
     const backupObj = { data, theme };
     const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(backupObj))}`;
+    const dlAnchor = document.getElementById('downloadAnchor');
+    dlAnchor.setAttribute('href', dataStr);
+    dlAnchor.setAttribute('download', `RxResumeBackup_${Date.now()}.json`);
+    dlAnchor.click();
+  };
+  
+  const exportToJsonld = () => {
+    const jsonldObj = JsontoJsonld(data);
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(jsonldObj))}`;
     const dlAnchor = document.getElementById('downloadAnchor');
     dlAnchor.setAttribute('href', dataStr);
     dlAnchor.setAttribute('download', `RxResumeBackup_${Date.now()}.json`);
@@ -66,7 +77,7 @@ const ActionsTab = ({ data, theme, dispatch }) => {
 
           <button
             type="button"
-            onClick={exportToJson}
+            onClick={exportToJsonld}
             className="bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium py-2 px-5 rounded"
           >
             <div className="flex justify-center items-center">
