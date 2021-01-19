@@ -99,13 +99,13 @@ I try to do what I can, but if you found the app helpful, or you're in a better 
 
 Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the Reactive Resume project and Json-ld resume project, and helped us along the way to make this a reality.
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" />Mitacs for funding the project
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" /> [Mitacs](https://www.mitacs.ca/) for funding the project
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" />[Direction X Corporation](https://directionx.ca) for co-funding and managing the project
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" /> [Direction X Corporation](https://directionx.ca) for co-funding and managing the project
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/shiri.jpg" width="60px" />[Dr. Nematollah Shiri](https://www.concordia.ca/ginacody/computer-science-software-eng/faculty.html?fpid=nematollaah-shiri) for contributing to the research of the project
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/shiri.jpg" width="60px" /> [Dr. Nematollah Shiri](https://www.concordia.ca/ginacody/computer-science-software-eng/faculty.html?fpid=nematollaah-shiri) for contributing to the research of the project
 
-<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" />[Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which this lab is heavily based on
+<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" /> [Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which this lab is heavily based on
 
 ---
 
