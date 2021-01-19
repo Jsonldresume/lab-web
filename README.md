@@ -101,11 +101,12 @@ Thank you to everyone who made this project possible, including the many users w
 
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" />Mitacs for funding the project
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" />[Direction X Corporation](https://directionx.ca) for managing the project
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" />[Direction X Corporation](https://directionx.ca) for co-funding and managing the project
 
 Dr. Nematollah Shiri (Concordia University) for contributing to the research of the project
 
 <img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" />[Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which this lab is heavily based on
+
 ---
 
 ![The Great Gatsby](https://camo.githubusercontent.com/a615c7e1ef9a850f5427cdc153186763305bb853/68747470733a2f2f692e696d6775722e636f6d2f4472386a3569762e676966)
