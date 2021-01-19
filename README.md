@@ -67,7 +67,7 @@ Thank you to all the amazing people who have contributed by translating it into 
 
 ### Building from Source
 
-Want to run your own instance of Json-ld resume? You are very much free to do so. The requirements to build from source are:
+Want to run your own instance of Json-ld lab-web? You are very much free to do so. The requirements to build from source are:
 
 - NodeJS/NPM
 
