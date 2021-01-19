@@ -38,8 +38,6 @@ You have complete control over what goes into your resume, how it looks, what co
 
 To translate the app, just fork the repository, go to `src/i18n/locales` and duplicate the `en.json` file to a new file `your-lang-code.json` and translate all of the strings inside. It's a simple process that would take just a few minutes, and by contributing, your name could also be added down below as a contributor.
 
-For those of you familiar with the Crowdin Platform, you could do that too and just head to http://crowdin.com/project/reactive-resume/ to translate the app over there. They have a great interface that helps you navigate through various strings and manage translations.
-
 ##### Languages Currently Supported
 
 - Arabic (عربى)
@@ -100,11 +98,16 @@ I try to do what I can, but if you found the app helpful, or you're in a better 
 ### Appreciation
 
 Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the original Reactive Resume project, and helped me along the way to make this a reality.
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="256px" />
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" />
+Mitacs for funding the project
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="256px" />
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" />
+Direction X Corporation for managing the project
 
-Dr. Nematollah Shiri (Concordia University)
+Dr. Nematollah Shiri (Concordia University) for contributing to the research of the project
+
+<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" />
+Amruth Pillai for Reactive-Resume Project
 ---
 
 ![The Great Gatsby](https://camo.githubusercontent.com/a615c7e1ef9a850f5427cdc153186763305bb853/68747470733a2f2f692e696d6775722e636f6d2f4472386a3569762e676966)
