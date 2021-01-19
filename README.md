@@ -99,11 +99,9 @@ I try to do what I can, but if you found the app helpful, or you're in a better 
 
 Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the Reactive Resume project and Json-ld resume project, and helped us along the way to make this a reality.
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" />
-Mitacs for funding the project
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" />Mitacs for funding the project
 
-<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" />
-Direction X Corporation for managing the project
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="60px" />[Direction X Corporation](https://directionx.ca) for managing the project
 
 Dr. Nematollah Shiri (Concordia University) for contributing to the research of the project
 
