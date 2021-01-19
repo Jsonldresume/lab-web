@@ -97,7 +97,8 @@ I try to do what I can, but if you found the app helpful, or you're in a better 
 
 ### Appreciation
 
-Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the original Reactive Resume project, and helped me along the way to make this a reality.
+Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the Reactive Resume project and Json-ld resume project, and helped us along the way to make this a reality.
+
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" />
 Mitacs for funding the project
 
@@ -107,7 +108,7 @@ Direction X Corporation for managing the project
 Dr. Nematollah Shiri (Concordia University) for contributing to the research of the project
 
 <img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" />
-Amruth Pillai for Reactive-Resume Project
+[Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which this lab is heavily based on
 ---
 
 ![The Great Gatsby](https://camo.githubusercontent.com/a615c7e1ef9a850f5427cdc153186763305bb853/68747470733a2f2f692e696d6775722e636f6d2f4472386a3569762e676966)
