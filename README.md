@@ -1,7 +1,7 @@
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/jsonldresume.png" width="256px" />
 
 ## A free and open source resume builder.
-https://img.shields.io/github/license/AmruthPillai/Reactive-Resume
+
 [![GitHub](https://img.shields.io/github/license/jsonldresume/lab-web)](https://github.com/jsonldresume/lab-web/blob/main/LICENSE)
 
 ### [Go to App](https://jsonldresume.com/)
