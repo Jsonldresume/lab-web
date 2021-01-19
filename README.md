@@ -1,9 +1,8 @@
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/jsonldresume.png" width="256px" />
 
 ## A free and open source resume builder.
-
-[![Crowdin](https://badges.crowdin.net/reactive-resume/localized.svg)](https://crowdin.com/project/reactive-resume)
-[![GitHub](https://img.shields.io/github/license/AmruthPillai/Reactive-Resume)](https://github.com/AmruthPillai/Reactive-Resume/blob/develop/LICENSE)
+https://img.shields.io/github/license/AmruthPillai/Reactive-Resume
+[![GitHub](https://img.shields.io/github/license/jsonldresume/lab-web)](https://github.com/jsonldresume/lab-web/blob/main/LICENSE)
 
 ### [Go to App](https://jsonldresume.com/)
 
@@ -91,13 +90,13 @@ And that's it! 🎉
 
 ### Donation
 
-I try to do what I can, but if you found the app helpful, or you're in a better position than the others who depend on this project for their first job, please consider donating as little as \$5 to help keep the project alive :)
+I try to do what I can, but if you found the app helpful, please consider donating as little as \$5 to help keep the project alive :)
 
 #### https://www.buymeacoffee.com/jsonldresume
 
 ### Appreciation
 
-Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the Reactive Resume project and Json-ld resume project, and helped us along the way to make this a reality.
+Thank you to everyone who made this project possible, including the many users who voiced their opinionsduring Json-ld resume project, and helped us along the way to make this a reality.
 
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="60px" /> [Mitacs](https://www.mitacs.ca/) for funding the project
 
