@@ -51,8 +51,12 @@ const mapPerson = (jsonRxResume, person) => {
 	let weight = _.get(jsonRxResume, 'profile["weight"]', {});
 	_.set(person, 'weight',weight);
 	
+	//person.hasCredential
 	let credentials = _.get(jsonRxResume, 'education', '');
 	for(let i=0; i<credentials["items"].length; i++){
+		
+		_.set(person, 'hasCredential['+i+']["@type"]', "EducationalOccupationalCredential");
+		
 		let educationalLevel = _.get(credentials["items"][i], 'degree', '');
 		_.set(person, 'hasCredential['+i+']["educationalLevel"]', educationalLevel);
 		
@@ -63,10 +67,42 @@ const mapPerson = (jsonRxResume, person) => {
 		_.set(person, 'hasCredential['+i+']["credentialCategory"]',degree);
 		
 		let endDate = _.get(credentials["items"][i], 'end', '');
-		_.set(person, 'hasCredential['+i+']["about"]["endDate"]',convertDate(endDate));
+		
+		let dateCreated = _.get(credentials["items"][i], 'dateGraduated', endDate);
+		_.set(person, 'hasCredential['+i+']["dateCreated"]',convertDate(dateCreated));
+		
+		let description = _.get(credentials["items"][i], 'description', '');
+		_.set(person, 'hasCredential['+i+']["abstract"]',description);
+		
+		let studyType = _.get(credentials["items"][i], 'studyType', '');
+		_.set(person, 'hasCredential['+i+']["educationalLevel"]',studyType);
+		
+		let grade = _.get(credentials["items"][i], 'grade', '');
+		let aggregateRating = {
+			"@id": degreeUrl+"#gpa",
+			"@type": "aggregateRating",
+			"name": "GPA",
+			"ratingValue": grade,
+			"itemReviewed": {
+				"@id": degreeUrl
+			}
+		};
+		_.set(person, 'hasCredential['+i+']["aggregateRating"]',aggregateRating);
+		
+		//person.hasCredential.about
+		let about = {
+			"@id": degreeUrl+"#program",
+			"@type": "EducationalOccupationalProgram"
+		}
+		_.set(person, 'hasCredential['+i+']["about"]', about);
 		
 		let startDate = _.get(credentials["items"][i], 'start', '');
 		_.set(person, 'hasCredential['+i+']["about"]["startDate"]',convertDate(startDate));
+		
+		_.set(person, 'hasCredential['+i+']["about"]["endDate"]',convertDate(endDate));
+		
+		
+		
 	}
 	
 	console.log(person);
