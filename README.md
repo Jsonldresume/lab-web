@@ -63,11 +63,11 @@ To translate the app, just fork the repository, go to `src/i18n/locales` and dup
 - Turkish (Türkçe)
 - Ukrainian (Українська)
 
-Thank you to all the amazing people who have contributed to Reactive Resume by translating it into their native language.
+Thank you to all the amazing people who have contributed by translating it into their native language.
 
 ### Building from Source
 
-Want to run your own instance of Reactive Resume? You are very much free to do so. The requirements to build from source are:
+Want to run your own instance of Json-ld resume? You are very much free to do so. The requirements to build from source are:
 
 - NodeJS/NPM
 
