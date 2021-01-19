@@ -1,4 +1,4 @@
-<img src="https://avatars3.githubusercontent.com/u/75718442?s=200&v=4" width="256px" />
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/jsonldresume.png" width="256px" />
 
 ## A free and open source resume builder.
 
@@ -28,11 +28,11 @@ You have complete control over what goes into your resume, how it looks, what co
 
 ### Screenshots
 
-<img src="https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/develop/static/images/screenshots/screen-1.png" width="400px" />
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/screenshots/1.JPG" width="400px" />
 &nbsp;
-<img src="https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/develop/static/images/screenshots/screen-3.png" width="400px" />
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/screenshots/2.JPG" width="400px" />
 &nbsp;
-<img src="https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/develop/static/images/screenshots/screen-5.png" width="400px" />
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/screenshots/3.JPG" width="400px" />
 
 ### Translation
 
@@ -97,12 +97,14 @@ I try to do what I can, but if you found the app helpful, or you're in a better 
 
 #### https://www.buymeacoffee.com/jsonldresume
 
-![Please buy me a coffee](https://i.imgur.com/x7g6kvF.png)
-
 ### Appreciation
 
 Thank you to everyone who made this project possible, including the many users who voiced their opinions, created issues and PRs to the original Reactive Resume project, and helped me along the way to make this a reality.
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/Mitacs.png" width="256px" />
 
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/DXC.jpg" width="256px" />
+
+Dr. Nematollah Shiri (Concordia University)
 ---
 
 ![The Great Gatsby](https://camo.githubusercontent.com/a615c7e1ef9a850f5427cdc153186763305bb853/68747470733a2f2f692e696d6775722e636f6d2f4472386a3569762e676966)
