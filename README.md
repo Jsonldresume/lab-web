@@ -105,7 +105,7 @@ Thank you to everyone who made this project possible, including the many users w
 
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/shiri.jpg" width="60px" /> [Dr. Nematollah Shiri](https://www.concordia.ca/ginacody/computer-science-software-eng/faculty.html?fpid=nematollaah-shiri) for contributing to the research of the project
 
-<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" /> [Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which this lab is heavily based on
+<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" /> [Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which lab-web is heavily based on
 
 ---
 
