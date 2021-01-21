@@ -58,7 +58,7 @@ const Celebi = () => {
     <header style={styles.header}>
       <div className="ml-6">
         <h1 className="tracking-wide uppercase font-semibold" style={{ fontSize: '2.75em' }}>
-          {data.profile.firstName} {data.profile.lastName}
+          {data.jsonld['@graph'][1].givenName[0]['@value']} {data.profile.lastName}
         </h1>
         <h6 className="text-lg tracking-wider uppercase">{data.profile.subtitle}</h6>
       </div>

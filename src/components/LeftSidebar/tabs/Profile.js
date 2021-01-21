@@ -5,7 +5,6 @@ import TextField from '../../../shared/TextField';
 
 const ProfileTab = ({ data, onChange }) => {
   const { t } = useTranslation('leftSidebar');
-
   return (
     <div>
       <TextField
@@ -30,8 +29,8 @@ const ProfileTab = ({ data, onChange }) => {
           className="mb-6"
           label={t('profile.firstName.label')}
           placeholder="Jane"
-          value={data.profile.firstName}
-          onChange={v => onChange('data.profile.firstName', v)}
+          value={data.jsonld['@graph'][1].givenName[0]['@value']}
+          onChange={v => onChange('data.jsonld["@graph"][1].givenName[0]["@value"]', v)}
         />
 
         <TextField

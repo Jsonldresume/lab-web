@@ -26,11 +26,10 @@ const ActionsTab = ({ data, theme, dispatch }) => {
   };
   
   const exportToJsonld = () => {
-    const jsonldObj = JsontoJsonld(data);
-    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(jsonldObj))}`;
+    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data.jsonld))}`;
     const dlAnchor = document.getElementById('downloadAnchor');
     dlAnchor.setAttribute('href', dataStr);
-    dlAnchor.setAttribute('download', `RxResumeBackup_${Date.now()}.json`);
+    dlAnchor.setAttribute('download', `jsonldResume_${Date.now()}.json`);
     dlAnchor.click();
   };
 

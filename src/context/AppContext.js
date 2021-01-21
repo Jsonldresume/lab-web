@@ -3,11 +3,21 @@ import get from 'lodash/get';
 import set from 'lodash/set';
 import remove from 'lodash/remove';
 
-import demoData from '../assets/demo/data.json';
+import demoJsonldData from '../assets/demo/jsonlddata.json';
 import { move } from '../utils';
 
 const initialState = {
   data: {
+    jsonld:{
+      '@graph': [
+        {
+          
+        },
+        {
+          givenName:[{'@value':''}]
+        }
+      ]
+    },
     profile: {
       heading: 'Profile',
       photo: '',
@@ -134,7 +144,7 @@ const reducer = (state, { type, payload }) => {
     case 'load_demo_data':
       return {
         ...newState,
-        ...demoData,
+        ...demoJsonldData,
       };
     case 'reset':
       return initialState;
