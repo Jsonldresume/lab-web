@@ -31,6 +31,7 @@ const ProfileTab = ({ data, onChange }) => {
           placeholder="Jane"
           value={data.jsonld['@graph'][1].givenName[0]['@value']}
           onChange={v => onChange('data.jsonld["@graph"][1].givenName[0]["@value"]', v)}
+          type="multilang"
         />
 
         <TextField
