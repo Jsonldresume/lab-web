@@ -29,8 +29,8 @@ const ProfileTab = ({ data, onChange }) => {
           className="mb-6"
           label={t('profile.firstName.label')}
           placeholder="Jane"
-          value={data.jsonld['@graph'][1].givenName[0]['@value']}
-          onChange={v => onChange('data.jsonld["@graph"][1].givenName[0]["@value"]', v)}
+          value={data.jsonld['@graph'][1].givenName}
+          onChange={v => onChange('data.jsonld["@graph"][1].givenName', v)}
           type="multilang"
         />
 
@@ -38,8 +38,9 @@ const ProfileTab = ({ data, onChange }) => {
           className="mb-6"
           label={t('profile.lastName.label')}
           placeholder="Doe"
-          value={data.profile.lastName}
-          onChange={v => onChange('data.profile.lastName', v)}
+          value={data.jsonld['@graph'][1].familyName}
+          onChange={v => onChange('data.jsonld["@graph"][1].familyName', v)}
+          type="multilang"
         />
       </div>
 

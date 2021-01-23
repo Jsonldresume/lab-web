@@ -14,7 +14,8 @@ const initialState = {
           
         },
         {
-          givenName:[{'@value':''}]
+          givenName:[{'@language': 'en', '@value':''}],
+          familyName: [{'@language': 'en', '@value':''}]
         }
       ]
     },

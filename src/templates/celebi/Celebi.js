@@ -53,13 +53,34 @@ const Celebi = () => {
         />
       </div>
     );
-
+  
+  const Subnames = () => (
+    <h6 className="text-lg tracking-wider uppercase">{((data.jsonld['@graph'][1].givenName[1] && data.jsonld['@graph'][1].givenName[1]['@value']) ? (" ("+data.jsonld['@graph'][1].givenName.map(function(elem,index){
+              if(index > 0 && elem['@value']){
+                let name = elem['@value'];
+                if(data.jsonld['@graph'][1].familyName[index] && data.jsonld['@graph'][1].familyName[index]['@value']){
+                  name += " "+data.jsonld['@graph'][1].familyName[index]['@value'];
+                }
+                return name;
+              }else{
+                return null;
+              }
+}).filter(function (el) {
+  return el != null;
+}).join(", ")+")") : (""))}
+</h6>
+  );
+  const Names = () => (
+    <h1 className="tracking-wide uppercase font-semibold" style={{ fontSize: '2.75em' }}>
+          {(Array.isArray(data.jsonld['@graph'][1].givenName)) ? (data.jsonld['@graph'][1].givenName[0]['@value']) : (data.jsonld['@graph'][1].givenName)} {(Array.isArray(data.jsonld['@graph'][1].familyName)) ? (data.jsonld['@graph'][1].familyName[0]['@value']) : (data.jsonld['@graph'][1].familyName)}
+        </h1>
+  );
+  
   const Header = () => (
     <header style={styles.header}>
       <div className="ml-6">
-        <h1 className="tracking-wide uppercase font-semibold" style={{ fontSize: '2.75em' }}>
-          {data.jsonld['@graph'][1].givenName[0]['@value']} {data.profile.lastName}
-        </h1>
+        <Names />
+        <Subnames />
         <h6 className="text-lg tracking-wider uppercase">{data.profile.subtitle}</h6>
       </div>
     </header>
