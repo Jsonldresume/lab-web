@@ -1,10 +1,29 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import * as _  from 'lodash';
 
 import TextField from '../../../shared/TextField';
 
 const ProfileTab = ({ data, onChange }) => {
   const { t } = useTranslation('leftSidebar');
+  let personUrl = "_:";
+  const setValue = (path, field, v, type="", id="_:") => {
+    let val = _.get(data, path+"."+field, null);
+    if(val === null){
+      if(typeof(v) === "string" || typeof(v) === "number"){
+        _.set(data, path+"."+field, "");
+      }else if(typeof(v) === "object"){
+          if(Array.isArray(v)){
+            _.set(data, path+"."+field, []);
+          }else{
+            _.set(data, path+"."+field, {});
+          }
+      }
+    }
+    onChange("data."+path+'.'+field, v);
+    onChange("data."+path+'["@id"]', id);
+    onChange("data."+path+'["@type"]', type);
+  };
   return (
     <div>
       <TextField
@@ -20,8 +39,8 @@ const ProfileTab = ({ data, onChange }) => {
         className="mb-6"
         label={t('profile.photoUrl.label')}
         placeholder="https://i.imgur.com/..."
-        value={data.profile.photo}
-        onChange={v => onChange('data.profile.photo', v)}
+        value={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
+        onChange={v => {setValue('jsonld["@graph"][1].image', "contentUrl", v, "ImageObject", personUrl+"#image");}}
       />
 
       <div className="grid grid-cols-2 col-gap-4">

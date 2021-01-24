@@ -4,6 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import AppContext from '../../context/AppContext';
 import { hexToRgb } from '../../utils';
 
+import * as _  from 'lodash';
+
 const styles = {
   header: {
     position: 'absolute',
@@ -45,7 +47,7 @@ const Celebi = () => {
       <div className="relative z-40">
         <img
           className="w-full object-cover object-center"
-          src={data.profile.photo}
+          src={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
           alt="Resume Photograph"
           style={{
             height: '160px',
@@ -55,11 +57,16 @@ const Celebi = () => {
     );
   
   const Subnames = () => (
-    <h6 className="text-lg tracking-wider uppercase">{((data.jsonld['@graph'][1].givenName[1] && data.jsonld['@graph'][1].givenName[1]['@value']) ? (" ("+data.jsonld['@graph'][1].givenName.map(function(elem,index){
+    <h6 className="text-lg tracking-wider uppercase">{((data.jsonld['@graph'][1].givenName[1]) ? (" ("+data.jsonld['@graph'][1].givenName.map(function(elem,index){
               if(index > 0 && elem['@value']){
                 let name = elem['@value'];
-                if(data.jsonld['@graph'][1].familyName[index] && data.jsonld['@graph'][1].familyName[index]['@value']){
-                  name += " "+data.jsonld['@graph'][1].familyName[index]['@value'];
+                console.log(elem['@language']);
+                console.log(data.jsonld['@graph'][1].familyName);
+                let familynameIndex = data.jsonld['@graph'][1].familyName.findIndex(x=>x['@language']===elem['@language']);
+                if(familynameIndex >= 0){
+                  if(data.jsonld['@graph'][1].familyName[familynameIndex] && data.jsonld['@graph'][1].familyName[familynameIndex]['@value']){
+                    name += " "+data.jsonld['@graph'][1].familyName[familynameIndex]['@value'];
+                  }
                 }
                 return name;
               }else{
