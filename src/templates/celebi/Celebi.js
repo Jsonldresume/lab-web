@@ -43,16 +43,23 @@ const Celebi = () => {
   );
 
   const Photo = () =>
-    data.profile.photo !== '' && (
+    (_.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' && (
       <div className="relative z-40">
         <img
           className="w-full object-cover object-center"
           src={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
-          alt="Resume Photograph"
+          alt="Person Photograph"
           style={{
             height: '160px',
           }}
         />
+      </div>
+    )) || (
+      <div className="relative z-40">
+        <div style={{
+            height: '160px',
+          }}>
+        </div>
       </div>
     );
   
@@ -88,7 +95,7 @@ const Celebi = () => {
       <div className="ml-6">
         <Names />
         <Subnames />
-        <h6 className="text-lg tracking-wider uppercase">{data.profile.subtitle}</h6>
+        <h6 className="text-lg tracking-wider uppercase">{_.get(data, 'jsonld["@graph"][1].description', "")}</h6>
       </div>
     </header>
   );
@@ -109,20 +116,38 @@ const Celebi = () => {
         <p className="text-sm">{value}</p>
       </div>
     );
-
+  
+  const Address = () => (
+    (
+      data.jsonld["@graph"][1].address && data.jsonld["@graph"][1].address.length>0 &&
+      data.address.enable && (
+        <div className="mb-6">
+          {data.jsonld["@graph"][1].address.filter(x => (Date.parse(x.hoursAvailable.validThrough) - Date.parse(new Date()))>0).map(AddressItem)}
+        </div>
+      )
+    ) || ("")
+  );
+  
+  const AddressItem = (x, index) => (
+    (
+        <div className="mb-3" key={x["@id"]}>
+          {index===0?<h6 className="text-xs font-bold">{data.profile.address.heading || "Address"}</h6>:""}
+          <p className="text-sm">{x.streetAddress}</p>
+          <p className="text-sm">{x.addressLocality} {x.addressRegion}</p>
+          <p className="text-sm">{x.addressCountry} {x.postalCode}</p>
+        </div>
+    )
+  );
   const Contact = () => (
-    <div className="mb-6">
-      <Heading title="Contact" className="mt-8 w-3/4 mx-auto" />
-      <div className="mb-3">
-        <h6 className="text-xs font-bold">Address</h6>
-        <p className="text-sm">{data.profile.address.line1}</p>
-        <p className="text-sm">{data.profile.address.line2}</p>
-        <p className="text-sm">{data.profile.address.line3}</p>
+    data.contacts.enable && (
+      <div className="mb-6">
+        <Heading title="Contact" className="mt-8 w-3/4 mx-auto" />
+        <Address />
+        <ContactItem label="Phone" value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")} />
+        <ContactItem label="Email Address" value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")} />
+        <ContactItem label="Website" value={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")} />
       </div>
-      <ContactItem label="Phone" value={data.profile.phone} />
-      <ContactItem label="Email Address" value={data.profile.email} />
-      <ContactItem label="Website" value={data.profile.website} />
-    </div>
+    )
   );
 
   const WorkItem = x => (

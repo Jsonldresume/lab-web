@@ -47,12 +47,14 @@
                             "@language": "en"
                         }
                     ],
+                    "description": "Full-stack Developer",
                     "honorificPrefix": [],
                     "birthDate": "",
                     "birthPlace": {},
                     "nationality": [],
                     "height": {},
                     "weight": {},
+                    "address": [],
                     "hasCredential": [
                         {
                             "@type": "EducationalOccupationalCredential",
@@ -118,6 +120,14 @@
             "phone": "+1 661-808-4188",
             "website": "nancyontheweb.com",
             "email": "nancyjack43@gmail.com"
+        },
+        "address": {
+            "heading": "Address",
+            "enable": true
+        },
+        "contacts": {
+            "heading": "Contacts",
+            "enable": true
         },
         "objective": {
             "enable": true,

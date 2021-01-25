@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react';
+import * as _  from 'lodash';
 
 import AppContext from '../../context/AppContext';
 import TabBar from '../../shared/TabBar';
 import ProfileTab from './tabs/Profile';
+import AddressTab from './tabs/Address';
+import ContactsTab from './tabs/Contacts';
 import ObjectiveTab from './tabs/Objective';
 import WorkTab from './tabs/Work';
 import EducationTab from './tabs/Education';
@@ -20,17 +23,19 @@ const LeftSidebar = () => {
   const { data } = state;
 
   const tabs = [
-    { key: 'profile', name: data.profile.heading },
-    { key: 'objective', name: data.objective.heading },
-    { key: 'work', name: data.work.heading },
-    { key: 'education', name: data.education.heading },
-    { key: 'awards', name: data.awards.heading },
-    { key: 'certifications', name: data.certifications.heading },
-    { key: 'skills', name: data.skills.heading },
-    { key: 'hobbies', name: data.hobbies.heading },
-    { key: 'languages', name: data.languages.heading },
-    { key: 'references', name: data.references.heading },
-    { key: 'extras', name: data.extras.heading },
+    { key: 'profile', name: _.get(data, "profile.heading", "Profile") },
+    { key: 'address', name: _.get(data, "address.headin", "Address") },
+    { key: 'contacts', name: _.get(data, "contacts.heading", "Contacts") },
+    { key: 'objective', name: _.get(data, "objective.heading", "Objective") },
+    { key: 'work', name: _.get(data, "work.heading", "Work") },
+    { key: 'education', name: _.get(data, "education.heading", "Education") },
+    { key: 'awards', name: _.get(data, "awards.heading", "Awards")  },
+    { key: 'certifications', name: _.get(data, "certifications.heading", "Certifications") },
+    { key: 'skills', name: _.get(data, "skills.heading", "Skills") },
+    { key: 'hobbies', name: _.get(data, "hobbies.heading", "Hobbies") },
+    { key: 'languages', name: _.get(data, "languages.heading", "Languages") },
+    { key: 'references', name: _.get(data, "references.heading", "References") },
+    { key: 'extras', name: _.get(data, "extras.heading", "Extras") },
   ];
   const [currentTab, setCurrentTab] = useState(tabs[0].key);
   const onChange = (key, value) => {
@@ -49,6 +54,10 @@ const LeftSidebar = () => {
     switch (currentTab) {
       case 'profile':
         return <ProfileTab data={data} onChange={onChange} />;
+      case 'address':
+        return <AddressTab data={data} onChange={onChange} />;
+      case 'contacts':
+        return <ContactsTab data={data} onChange={onChange} />;
       case 'objective':
         return <ObjectiveTab data={data} onChange={onChange} />;
       case 'work':

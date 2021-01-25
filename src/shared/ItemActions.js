@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 import Checkbox from './Checkbox';
 import { deleteItem, moveItemUp, moveItemDown } from '../utils';
 
-const ItemActions = ({ dispatch, first, identifier, item, last, onChange, type }) => {
+const ItemActions = ({ dispatch, first, identifier, item, last, onChange, type, enableAction }) => {
   const { t } = useTranslation();
 
   return (
     <div className="flex justify-between">
       <div className="flex items-center">
+      {enableAction ? enableAction(identifier, item, onChange) : (
         <Checkbox
           size="2.25rem"
           checked={item.enable}
@@ -17,6 +18,7 @@ const ItemActions = ({ dispatch, first, identifier, item, last, onChange, type }
             onChange(`${identifier}enable`, v);
           }}
         />
+      )}
 
         <button
           type="button"
