@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+
 import ReactMarkdown from 'react-markdown';
 
 import AppContext from '../../context/AppContext';
@@ -99,13 +100,25 @@ const Celebi = () => {
       </div>
     </header>
   );
-
+  
   const Objective = () =>
     data.objective &&
     data.objective.enable && (
       <div className="mb-6">
         <Heading title={data.objective.heading} />
-        <ReactMarkdown className="my-3 mr-10 text-sm" source={data.objective.body} />
+          {_.get(data, 'jsonld["@graph"][1].seeks',[]).map((x, index) => (
+              <ReactMarkdown key={"objetive_"+index} className="mr-10 text-sm" source={x.description} />
+          ))}
+          {_.get(data, 'jsonld["@graph"][1].seeks',[]).map((x, index) => (
+            <div key={"holder_"+index}>
+              <p className="text-xs text-gray-800" key={"p_"+index}>
+                {(_.get(x,'availableAtOrFrom.address.addressCountry', null) || _.get(x,'availableAtOrFrom.address.addressRegion', null) || _.get(x,'availableAtOrFrom.address.addressLocality', null)) ? "" : ""}
+                {(_.get(x,'availableAtOrFrom.address.addressLocality', null) ? (_.get(x,'availableAtOrFrom.address.addressLocality', '')+' ') : '')
+                +(_.get(x,'availableAtOrFrom.address.addressRegion', null) ? (_.get(x,'availableAtOrFrom.address.addressRegion', '')+' ') : '')
+                +(_.get(x,'availableAtOrFrom.address.addressCountry', null) ? (_.get(x,'availableAtOrFrom.address.addressCountry', '')) : '')} | {(_.get(x, 'availabilityStarts', null)) ? (_.get(x, 'availabilityStarts', '')) : ""} {_.get(x, 'availabilityEnds', null) ? ("-" + " "+_.get(x,'availabilityEnds','')): ""}
+              </p>
+            </div>
+          ))}
       </div>
     );
 
