@@ -115,7 +115,7 @@ const Celebi = () => {
                 {(_.get(x,'availableAtOrFrom.address.addressCountry', null) || _.get(x,'availableAtOrFrom.address.addressRegion', null) || _.get(x,'availableAtOrFrom.address.addressLocality', null)) ? "" : ""}
                 {(_.get(x,'availableAtOrFrom.address.addressLocality', null) ? (_.get(x,'availableAtOrFrom.address.addressLocality', '')+' ') : '')
                 +(_.get(x,'availableAtOrFrom.address.addressRegion', null) ? (_.get(x,'availableAtOrFrom.address.addressRegion', '')+' ') : '')
-                +(_.get(x,'availableAtOrFrom.address.addressCountry', null) ? (_.get(x,'availableAtOrFrom.address.addressCountry', '')) : '')} | {(_.get(x, 'availabilityStarts', null)) ? (_.get(x, 'availabilityStarts', '')) : ""} {_.get(x, 'availabilityEnds', null) ? ("-" + " "+_.get(x,'availabilityEnds','')): ""}
+                +(_.get(x,'availableAtOrFrom.address.addressCountry', null) ? (_.get(x,'availableAtOrFrom.address.addressCountry', '')) : '')} | {(_.get(x, 'availabilityStarts', null)) ? (_.get(x, 'availabilityStarts', '')) : ""} {_.get(x, 'availabilityEnds', null) ? ("- " +_.get(x,'availabilityEnds','')): ""}
               </p>
             </div>
           ))}
