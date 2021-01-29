@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import AppContext from '../../context/AppContext';
 import { hexToRgb } from '../../utils';
 
+import { v4 as uuidv4 } from 'uuid';
 import * as _  from 'lodash';
 
 const styles = {
@@ -162,16 +163,33 @@ const Celebi = () => {
       </div>
     )
   );
-
+  
+  const WorkResponsibilityItem = x => (
+    x && (
+        <li className="mt-2 text-sm" key={uuidv4()}>{x}</li>
+    )
+  )
+    
+  const WorkResponsibility = ({responsibilities}) => (
+    responsibilities && responsibilities.length && (
+      <ul>
+      {
+        responsibilities.filter(x => (x !== '')).map(WorkResponsibilityItem)
+      }
+      </ul>
+    )
+  )
+    
   const WorkItem = x => (
-    <div key={x.id} className="my-3 mr-10">
+    <div key={_.get(x,'@id', 'main')} className="my-3 mr-10">
       <div>
-        <h6 className="font-semibold">{x.title}</h6>
+        <h6 className="font-semibold">{_.get(x,'subjectOf.organizer.name','')}</h6>
         <p className="text-xs text-gray-800">
-          {x.role} | {x.start} - {x.end}
+          {_.get(x,'roleName', '')} | {_.get(x,'startDate','')} - {_.get(x,'endDate','')}
         </p>
       </div>
-      <ReactMarkdown className="mt-2 text-sm" source={x.description} />
+      <ReactMarkdown className="mt-2 text-sm" source={_.get(x,'description','')} />
+      <WorkResponsibility responsibilities={_.get(x, "hasOccupation.responsibilities", [])} />
     </div>
   );
 
@@ -180,7 +198,7 @@ const Celebi = () => {
     data.work.enable && (
       <div className="mb-6">
         <Heading title={data.work.heading} />
-        {data.work.items.filter(x => x.enable).map(WorkItem)}
+        {_.get(data, "jsonld['@graph'][1].hasOccupation", []).filter(x => !_.get(x, '@id', '').endsWith("disable")).map(WorkItem)}
       </div>
     );
 
