@@ -42,7 +42,7 @@ const WorkTab = ({ data, onChange }) => {
           index={index}
           item={x}
           key={_.get(x, '@id', 'item')}
-          last={index === data.jsonld["@graph"][1].hasOccupation.length - 1}
+          last={index === _.size(data.jsonld["@graph"][1].hasOccupation) - 1}
           onChange={onChange}
         />
       ))}
@@ -55,20 +55,24 @@ const WorkTab = ({ data, onChange }) => {
 const Form = ({ item, onChange, identifier = '' }) => {
   const { t } = useTranslation(['leftSidebar', 'app']);
   const setValue = (path, field, v, type=null, id=null) => {
-    let val = _.get(item, path+"."+field, null);
+    let fullPath = path;
+    if(field){
+      fullPath = fullPath+"."+field;
+    }
+    let val = _.get(item, fullPath, null);
     if(val === null){
       if(typeof(v) === "string" || typeof(v) === "number"){
-        _.set(item, path+"."+field, "");
+        _.set(item, fullPath, "");
       }else if(typeof(v) === "object"){
           if(Array.isArray(v)){
-            _.set(item, path+"."+field, []);
+            _.set(item, fullPath, []);
           }else{
-            _.set(item, path+"."+field, {});
+            _.set(item, fullPath, {});
           }
       }
     }
   
-    onChange(identifier+"."+path+'.'+field, v);
+    onChange(identifier+fullPath, v);
     if(id){
       onChange(`${identifier}`+path+'["@id"]', id);
     }
@@ -119,6 +123,16 @@ const Form = ({ item, onChange, identifier = '' }) => {
         placeholder="Preparing project plans"
         value={_.get(item,'hasOccupation.responsibilities', [])}
         onChange={v => setValue('hasOccupation', "responsibilities", v)}
+        AddItem={()=>{}}
+        type="multitext"
+      />
+      
+      <TextField
+        className="mb-6"
+        label={t('work.skills.label')}
+        placeholder="Project Management"
+        value={_.get(item,'hasOccupation.skills', [])}
+        onChange={v => setValue('hasOccupation', "skills", v)}
         AddItem={()=>{}}
         type="multitext"
       />

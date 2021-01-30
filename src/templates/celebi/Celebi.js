@@ -164,6 +164,22 @@ const Celebi = () => {
     )
   );
   
+  const SectionSkillsItem = x => (
+    x && (
+        <p key={uuidv4()}>| {x} </p>
+    )
+  )
+    
+  const SectionSkills = ({skills}) => (
+    skills && skills.length && (
+      <div className="text-xs text-gray-800 flex">
+      {
+        skills.filter(x => (x !== '')).map(SectionSkillsItem)
+      }
+      </div>
+    )
+  )
+  
   const WorkResponsibilityItem = x => (
     x && (
         <li className="mt-2 text-sm" key={uuidv4()}>{x}</li>
@@ -179,7 +195,7 @@ const Celebi = () => {
       </ul>
     )
   )
-    
+  
   const WorkItem = x => (
     <div key={_.get(x,'@id', 'main')} className="my-3 mr-10">
       <div>
@@ -190,12 +206,12 @@ const Celebi = () => {
       </div>
       <ReactMarkdown className="mt-2 text-sm" source={_.get(x,'description','')} />
       <WorkResponsibility responsibilities={_.get(x, "hasOccupation.responsibilities", [])} />
+      <SectionSkills skills={_.get(x, "hasOccupation.skills", [])} />
     </div>
   );
 
   const Work = () =>
-    data.work &&
-    data.work.enable && (
+    _.get(data, "jsonld['@graph'][1].hasOccupation", []).length && data.work.enable && (
       <div className="mb-6">
         <Heading title={data.work.heading} />
         {_.get(data, "jsonld['@graph'][1].hasOccupation", []).filter(x => !_.get(x, '@id', '').endsWith("disable")).map(WorkItem)}
@@ -204,21 +220,22 @@ const Celebi = () => {
 
   const EducationItem = x => (
     <div key={x.id} className="my-3 mr-10">
-      <h6 className="font-semibold">{x.name}</h6>
-      <p className="text-xs">{x.major}</p>
+      <h6 className="font-semibold">{_.get(x, "about.provider.name", "")}</h6>
+      <p className="text-xs">{_.get(x, "educationalLevel", "")} {_.get(x, "about.educationalCredentialAwarded", "")}</p>
       <div className="text-xs">
-        {x.start} - {x.end}
+        {_.get(x, "about.startDate", "")} - {_.get(x, "about.endDate", "")}
       </div>
-      <ReactMarkdown className="mt-2 text-sm" source={x.description} />
+      <ReactMarkdown className="mt-2 text-sm" source={_.get(x, 'abstract', '')} />
+      <SectionSkills skills={_.get(x, "teaches", [])} />
     </div>
   );
 
   const Education = () =>
-    data.education &&
+    _.get(data, "jsonld['@graph'][1].hasCredential", []).length &&
     data.education.enable && (
       <div className="mb-6">
         <Heading title={data.education.heading} />
-        {data.education.items.filter(x => x.enable).map(EducationItem)}
+        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => !_.get(x, '@id', '').endsWith("disable")).map(EducationItem)}
       </div>
     );
 
