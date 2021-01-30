@@ -171,7 +171,7 @@ const Celebi = () => {
   )
     
   const SectionSkills = ({skills}) => (
-    skills && skills.length && (
+    skills && (skills.length>0) && (
       <div className="text-xs text-gray-800 flex">
       {
         skills.filter(x => (x !== '')).map(SectionSkillsItem)
@@ -187,7 +187,7 @@ const Celebi = () => {
   )
     
   const WorkResponsibility = ({responsibilities}) => (
-    responsibilities && responsibilities.length && (
+    responsibilities && (responsibilities.length>0) && (
       <ul>
       {
         responsibilities.filter(x => (x !== '')).map(WorkResponsibilityItem)
@@ -231,7 +231,7 @@ const Celebi = () => {
   );
 
   const Education = () =>
-    _.get(data, "jsonld['@graph'][1].hasCredential", []).length &&
+    (_.get(data, "jsonld['@graph'][1].hasCredential", []).length>0) &&
     data.education.enable && (
       <div className="mb-6">
         <Heading title={data.education.heading} />
