@@ -30,8 +30,6 @@ const LeftSidebar = () => {
     { key: 'work', name: _.get(data, "work.heading", "Work") },
     { key: 'education', name: _.get(data, "education.heading", "Education") },
     { key: 'awards', name: _.get(data, "awards.heading", "Awards")  },
-    { key: 'certifications', name: _.get(data, "certifications.heading", "Certifications") },
-    { key: 'skills', name: _.get(data, "skills.heading", "Skills") },
     { key: 'hobbies', name: _.get(data, "hobbies.heading", "Hobbies") },
     { key: 'languages', name: _.get(data, "languages.heading", "Languages") },
     { key: 'references', name: _.get(data, "references.heading", "References") },
@@ -66,10 +64,6 @@ const LeftSidebar = () => {
         return <EducationTab data={data} onChange={onChange} />;
       case 'awards':
         return <AwardsTab data={data} onChange={onChange} />;
-      case 'certifications':
-        return <CertificationsTab data={data} onChange={onChange} />;
-      case 'skills':
-        return <SkillsTab data={data} onChange={onChange} />;
       case 'hobbies':
         return <HobbiesTab data={data} onChange={onChange} />;
       case 'languages':

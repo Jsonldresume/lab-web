@@ -144,7 +144,7 @@ const Celebi = () => {
   
   const AddressItem = (x, index) => (
     (
-        <div className="mb-3" key={x["@id"]}>
+        <div className="mb-3" key={_.get(x,'@id', 'main')}>
           {index===0?<h6 className="text-xs font-bold">{data.profile.address.heading || "Address"}</h6>:""}
           <p className="text-sm">{x.streetAddress}</p>
           <p className="text-sm">{x.addressLocality} {x.addressRegion}</p>
@@ -219,7 +219,7 @@ const Celebi = () => {
     );
 
   const EducationItem = x => (
-    <div key={x.id} className="my-3 mr-10">
+    <div key={_.get(x,'@id', 'main')} className="my-3 mr-10">
       <h6 className="font-semibold">{_.get(x, "about.provider.name", "")}</h6>
       <p className="text-xs">{_.get(x, "educationalLevel", "")} {_.get(x, "about.educationalCredentialAwarded", "")}</p>
       <div className="text-xs">
@@ -235,7 +235,7 @@ const Celebi = () => {
     data.education.enable && (
       <div className="mb-6">
         <Heading title={data.education.heading} />
-        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => !_.get(x, '@id', '').endsWith("disable")).map(EducationItem)}
+        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.get(x, 'credentialCategory', '')==="Degree")).map(EducationItem)}
       </div>
     );
 
@@ -316,10 +316,10 @@ const Celebi = () => {
     );
 
   const AwardItem = x => (
-    <div key={x.id} className="my-2">
-      <h6 className="font-semibold">{x.title}</h6>
-      <p className="text-xs">{x.subtitle}</p>
-      <ReactMarkdown className="mt-2 text-sm" source={x.description} />
+    <div key={_.get(x,'@id', 'main')} className="my-2">
+      <h6 className="font-semibold">{_.get(x, "skill:title", "")}</h6>
+      <p className="text-xs">{_.get(x, "skill:nativeLabel", "")}</p>
+      <ReactMarkdown className="mt-2 text-sm" source={_.get(x, "description", "")} />
     </div>
   );
 
@@ -328,15 +328,15 @@ const Celebi = () => {
     data.awards.enable && (
       <div className="mb-6">
         <Heading light title={data.awards.heading} />
-        {data.awards.items.filter(x => x.enable).map(AwardItem)}
+        {_.get(data.jsonld["@graph"][0], 'award', []).filter(x => x["skill:title"]!=="").map(AwardItem)}
       </div>
     );
 
   const CertificationItem = x => (
     <div key={x.id} className="my-2">
-      <h6 className="font-semibold">{x.title}</h6>
-      <p className="text-xs">{x.subtitle}</p>
-      <ReactMarkdown className="mt-2 text-sm" source={x.description} />
+      <h6 className="font-semibold">{_.get(x, 'educationalLevel', '')}</h6>
+      <p className="text-xs">{_.get(x, 'about.educationalCredentialAwarded', '')}</p>
+      <ReactMarkdown className="mt-2 text-sm" source={_.get(x, 'abstract', '')} />
     </div>
   );
 
@@ -345,7 +345,7 @@ const Celebi = () => {
     data.certifications.enable && (
       <div className="mb-6">
         <Heading title={data.certifications.heading} className="w-3/4 mx-auto" />
-        {data.certifications.items.filter(x => x.enable).map(CertificationItem)}
+        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.get(x, 'credentialCategory', '')!=="Degree")).map(CertificationItem)}
       </div>
     );
 

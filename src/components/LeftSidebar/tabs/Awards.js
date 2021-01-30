@@ -12,6 +12,8 @@ import ItemActions from '../../../shared/ItemActions';
 import AddItemButton from '../../../shared/AddItemButton';
 import ItemHeading from '../../../shared/ItemHeading';
 
+import * as _  from 'lodash';
+
 const AwardsTab = ({ data, onChange }) => {
   const context = useContext(AppContext);
   const { dispatch } = context;
@@ -36,7 +38,7 @@ const AwardsTab = ({ data, onChange }) => {
 
       <hr className="my-6" />
 
-      {data.awards.items.map((x, index) => (
+      {_.get(data.jsonld["@graph"][0], 'award', []).map((x, index) => (
         <Item
           item={x}
           key={x.id}
@@ -44,7 +46,7 @@ const AwardsTab = ({ data, onChange }) => {
           onChange={onChange}
           dispatch={dispatch}
           first={index === 0}
-          last={index === data.awards.items.length - 1}
+          last={index === _.size(_.get(data.jsonld["@graph"][0], 'award', [])) - 1}
         />
       ))}
 
@@ -62,16 +64,16 @@ const Form = ({ item, onChange, identifier = '' }) => {
         className="mb-6"
         label={t('awards.title.label')}
         placeholder="Code For Good Hackathon"
-        value={item.title}
-        onChange={v => onChange(`${identifier}title`, v)}
+        value={_.get(item,'skill:title', "")}
+        onChange={v => onChange(`${identifier}['skill:title']`, v)}
       />
 
       <TextField
         className="mb-6"
         label={t('awards.subtitle.label')}
         placeholder="First Place, National Level"
-        value={item.subtitle}
-        onChange={v => onChange(`${identifier}subtitle`, v)}
+        value={_.get(item, 'skill:nativeLabel', '')}
+        onChange={v => onChange(`${identifier}['skill:nativeLabel']`, v)}
       />
 
       <TextArea
@@ -84,30 +86,29 @@ const Form = ({ item, onChange, identifier = '' }) => {
   );
 };
 
+const emptyItem = () => {
+  let id = uuidv4();
+  return ({
+    "@type": "skill:Award",
+    "@id": "_:"+id+"#enable",
+    "skill:title": "",
+	"skill:nativeLabel": "",
+    description: ''
+  });
+};
+
 const AddItem = ({ heading, dispatch }) => {
   const [isOpen, setOpen] = useState(false);
-  const [item, setItem] = useState({
-    id: uuidv4(),
-    enable: true,
-    title: '',
-    subtitle: '',
-    description: '',
-  });
+  const [item, setItem] = useState(emptyItem());
 
   const onChange = (key, value) => setItem(set({ ...item }, key, value));
 
   const onSubmit = () => {
-    if (item.title === '') return;
+    if (item["skill:title"] === '') return;
 
-    addItem(dispatch, 'awards', item);
+    addItem(dispatch, 'data.jsonld["@graph"][0]["award"]', item);
 
-    setItem({
-      id: uuidv4(),
-      enable: true,
-      title: '',
-      subtitle: '',
-      description: '',
-    });
+    setItem(emptyItem());
 
     setOpen(false);
   };
@@ -125,13 +126,20 @@ const AddItem = ({ heading, dispatch }) => {
   );
 };
 
+const ItemActionEnable = (identifier, item, onChange) => {
+  
+  return (
+    <></>
+  )
+}
+
 const Item = ({ item, index, onChange, dispatch, first, last }) => {
   const [isOpen, setOpen] = useState(false);
-  const identifier = `data.awards.items[${index}].`;
+  const identifier = `data.jsonld["@graph"][0].award[${index}].`;
 
   return (
     <div className="my-4 border border-gray-200 rounded p-5">
-      <ItemHeading title={item.title} setOpen={setOpen} isOpen={isOpen} />
+      <ItemHeading title={item["skill:title"]} setOpen={setOpen} isOpen={isOpen} />
 
       <div className={`mt-6 ${isOpen ? 'block' : 'hidden'}`}>
         <Form item={item} onChange={onChange} identifier={identifier} />
@@ -143,7 +151,8 @@ const Item = ({ item, index, onChange, dispatch, first, last }) => {
           item={item}
           last={last}
           onChange={onChange}
-          type="awards"
+          type="data.jsonld['@graph'][0].award"
+          enableAction={ItemActionEnable}
         />
       </div>
     </div>

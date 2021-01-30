@@ -65,11 +65,33 @@ To translate the app, just fork the repository, go to `src/i18n/locales` and dup
 
 Thank you to all the amazing people who have contributed by translating it into their native language.
 
-### Building from Source
-
-Want to run your own instance of Json-ld lab-web? You are very much free to do so. The requirements to build from source are:
+### Installing Pre-requisites
 
 - NodeJS/NPM
+
+This application needs NodeJs to run. You can download and install NodeJs from the below link on any platform if you do not have it already.
+[NodeJS](https://nodejs.org/en/)
+
+you can also check if you already have NodeJs installed by running the following two commands in terminal window
+
+```
+node -v
+npm -v
+```
+
+- Git
+You also need git to be able to easily download the files from github into our computer (unless in step 1, you prefer to download files manually from this github repository)
+[Git-Scm](https://git-scm.com/downloads)
+
+you can also check if you already have NodeJs installed by running the following command in terminal window
+
+```
+git --version
+```
+
+### Building from Source
+
+Want to run your own instance of Json-ld lab-web? You are very much free to do so. Follow 3 easy steps:
 
 1. First, clone this project repository
 
@@ -104,7 +126,7 @@ Thank you to everyone who made this project possible, including the many users w
 
 <img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/shiri.jpg" width="60px" /> [Dr. Nematollah Shiri](https://www.concordia.ca/ginacody/computer-science-software-eng/faculty.html?fpid=nematollaah-shiri) for contributing to the research of the project
 
-<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" /> [Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which lab-web is heavily based on
+<img src="https://crowdin-static.downloads.crowdin.com/avatar/14158753/large/e36727872f9ce95f97b0a7e49cb28667.jpeg" width="60px" /> [Amruth Pillai](https://github.com/AmruthPillai) for [Reactive-Resume Project](https://github.com/AmruthPillai/Reactive-Resume), which lab-web is heavily based on. We modified the base code to accomodate for json-ld instead of original json format, and also added cool fatures that are only attainable with json-ld.
 
 ---
 
