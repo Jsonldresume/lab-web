@@ -85,7 +85,7 @@ const Gengar = () => {
     </li>
   );
 
-  const Hobbies = () =>
+  const Memberships = () =>
     data.hobbies &&
     data.hobbies.enable && (
       <div className="mb-6">
@@ -300,7 +300,7 @@ const Gengar = () => {
           style={{ backgroundColor: `rgba(${r}, ${g}, ${b}, 0.1)` }}
         >
           <Skills />
-          <Hobbies />
+          <Memberships />
           <Languages />
           <Education />
           <Certifications />

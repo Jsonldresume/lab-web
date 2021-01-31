@@ -1,18 +1,19 @@
 import React, { useState, useContext } from 'react';
+import * as _  from 'lodash';
 
 import AppContext from '../../context/AppContext';
 import TabBar from '../../shared/TabBar';
 import ProfileTab from './tabs/Profile';
+import AddressTab from './tabs/Address';
+import ContactsTab from './tabs/Contacts';
 import ObjectiveTab from './tabs/Objective';
 import WorkTab from './tabs/Work';
 import EducationTab from './tabs/Education';
 import AwardsTab from './tabs/Awards';
-import CertificationsTab from './tabs/Certifications';
-import SkillsTab from './tabs/Skills';
 import ExtrasTab from './tabs/Extras';
 import LanguagesTab from './tabs/Languages';
 import ReferencesTab from './tabs/References';
-import HobbiesTab from './tabs/Hobbies';
+import MembershipsTab from './tabs/Memberships';
 
 const LeftSidebar = () => {
   const context = useContext(AppContext);
@@ -20,17 +21,17 @@ const LeftSidebar = () => {
   const { data } = state;
 
   const tabs = [
-    { key: 'profile', name: data.profile.heading },
-    { key: 'objective', name: data.objective.heading },
-    { key: 'work', name: data.work.heading },
-    { key: 'education', name: data.education.heading },
-    { key: 'awards', name: data.awards.heading },
-    { key: 'certifications', name: data.certifications.heading },
-    { key: 'skills', name: data.skills.heading },
-    { key: 'hobbies', name: data.hobbies.heading },
-    { key: 'languages', name: data.languages.heading },
-    { key: 'references', name: data.references.heading },
-    { key: 'extras', name: data.extras.heading },
+    { key: 'profile', name: _.get(data, "profile.heading", "Profile") },
+    { key: 'address', name: _.get(data, "address.headin", "Address") },
+    { key: 'contacts', name: _.get(data, "contacts.heading", "Contacts") },
+    { key: 'objective', name: _.get(data, "objective.heading", "Objective") },
+    { key: 'work', name: _.get(data, "work.heading", "Work") },
+    { key: 'education', name: _.get(data, "education.heading", "Education") },
+    { key: 'awards', name: _.get(data, "awards.heading", "Awards")  },
+    { key: 'memberships', name: _.get(data, "memberships.heading", "Memberships") },
+    { key: 'languages', name: _.get(data, "languages.heading", "Languages") },
+    { key: 'references', name: _.get(data, "references.heading", "References") },
+    { key: 'extras', name: _.get(data, "extras.heading", "Extras") },
   ];
   const [currentTab, setCurrentTab] = useState(tabs[0].key);
   const onChange = (key, value) => {
@@ -49,6 +50,10 @@ const LeftSidebar = () => {
     switch (currentTab) {
       case 'profile':
         return <ProfileTab data={data} onChange={onChange} />;
+      case 'address':
+        return <AddressTab data={data} onChange={onChange} />;
+      case 'contacts':
+        return <ContactsTab data={data} onChange={onChange} />;
       case 'objective':
         return <ObjectiveTab data={data} onChange={onChange} />;
       case 'work':
@@ -57,12 +62,8 @@ const LeftSidebar = () => {
         return <EducationTab data={data} onChange={onChange} />;
       case 'awards':
         return <AwardsTab data={data} onChange={onChange} />;
-      case 'certifications':
-        return <CertificationsTab data={data} onChange={onChange} />;
-      case 'skills':
-        return <SkillsTab data={data} onChange={onChange} />;
-      case 'hobbies':
-        return <HobbiesTab data={data} onChange={onChange} />;
+      case 'memberships':
+        return <MembershipsTab data={data} onChange={onChange} />;
       case 'languages':
         return <LanguagesTab data={data} onChange={onChange} />;
       case 'references':

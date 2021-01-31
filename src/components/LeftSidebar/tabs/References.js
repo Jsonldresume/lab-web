@@ -12,6 +12,8 @@ import ItemActions from '../../../shared/ItemActions';
 import ItemHeading from '../../../shared/ItemHeading';
 import AddItemButton from '../../../shared/AddItemButton';
 
+import * as _  from 'lodash';
+
 const ReferencesTab = ({ data, onChange }) => {
   const context = useContext(AppContext);
   const { dispatch } = context;
@@ -24,8 +26,7 @@ const ReferencesTab = ({ data, onChange }) => {
           key: 'references',
           value: {
             enable: false,
-            heading: 'References',
-            items: [],
+            heading: 'References'
           },
         },
       });
@@ -33,7 +34,7 @@ const ReferencesTab = ({ data, onChange }) => {
       dispatch({ type: 'save_data' });
     }
   }, [data, dispatch]);
-
+  
   return (
     'references' in data && (
       <>
@@ -55,15 +56,15 @@ const ReferencesTab = ({ data, onChange }) => {
 
         <hr className="my-6" />
 
-        {data.references.items.map((x, index) => (
+        {_.get(data.jsonld["@graph"][1], 'interactionStatistic', []).filter(x => _.get(x, 'disambiguatingDescription', '')=== 'Reference').map((x, index) => (
           <Item
             item={x}
-            key={x.id}
+            key={_.get(x,'@id', 'main')}
             index={index}
             onChange={onChange}
             dispatch={dispatch}
             first={index === 0}
-            last={index === data.references.items.length - 1}
+            last={index === _.get(data.jsonld["@graph"][1], 'interactionStatistic', []).filter(x => _.get(x, 'disambiguatingDescription', '')=== 'Reference').length - 1}
           />
         ))}
 
@@ -78,77 +79,107 @@ const Form = ({ item, onChange, identifier = '' }) => {
 
   return (
     <div>
-      <TextField
-        className="mb-6"
-        label={t('references.name.label')}
-        placeholder="Richard Hendricks"
-        value={item.name}
-        onChange={v => onChange(`${identifier}name`, v)}
-      />
+      <div className="grid grid-cols-2 col-gap-4">
+        <TextField
+          className="mb-6"
+          label={t('references.name.label')}
+          placeholder="Richard Hendricks"
+          value={_.get(item, 'interactionType.participant.givenName', '')}
+          onChange={v => onChange(`${identifier}interactionType.participant.givenName`, v)}
+        />
+        
+        <TextField
+          className="mb-6"
+          label={t('references.familyName.label')}
+          placeholder="Richard Hendricks"
+          value={_.get(item, 'interactionType.participant.familyName', '')}
+          onChange={v => onChange(`${identifier}interactionType.participant.familyName`, v)}
+        />
+      </div>
 
       <TextField
         className="mb-6"
         label={t('references.position.label')}
         placeholder="CEO, Pied Piper"
-        value={item.position}
-        onChange={v => onChange(`${identifier}position`, v)}
+        value={_.get(item, 'interactionType.participant.jobTitle', '')}
+        onChange={v => onChange(`${identifier}interactionType.participant.jobTitle`, v)}
       />
 
       <TextField
         className="mb-6"
         label={t('references.phone.label')}
         placeholder="+1 541 754 3010"
-        value={item.phone}
-        onChange={v => onChange(`${identifier}phone`, v)}
+        value={_.get(item, 'interactionType.participant.telephone', '')}
+        onChange={v => onChange(`${identifier}interactionType.participant.telephone`, v)}
       />
 
       <TextField
         className="mb-6"
         label={t('references.email.label')}
         placeholder="richard@piedpiper.com"
-        value={item.email}
-        onChange={v => onChange(`${identifier}email`, v)}
+        value={_.get(item, 'interactionType.participant.email', '')}
+        onChange={v => onChange(`${identifier}interactionType.participant.email`, v)}
       />
 
       <TextArea
         rows="5"
         className="mb-6"
         label={t('app:item.description.label')}
-        value={item.description}
-        onChange={v => onChange(`${identifier}description`, v)}
+        value={_.get(item, 'result[0].reviewRating.ratingExplanation', '')}
+        onChange={v => onChange(`${identifier}result[0].reviewRating.ratingExplanation`, v)}
       />
     </div>
   );
 };
-
+const emptyItem = () => {
+  let id = uuidv4();
+  return (
+    {
+      "@id": "_:Reference#"+id,
+      "@type": "InteractionCounter",
+      "disambiguatingDescription": "Reference",
+      "interactionType": {
+        "@id": "_:Reference#"+id+"#interactionType",
+        "@type": "AssessAction",
+        "participant": {
+          "@id": "_:Reference#"+id+"#interactionType#participant",
+          "@type": "Person"
+        },
+        "result": [
+          {
+            "@id": "_:Reference#"+id+"#result",
+            "@type": "Review",
+            "itemReviewed": {
+            
+            },
+            "reviewAspect": [
+              
+            ],
+            "reviewRating": {
+              "@id": "_:Reference#"+id+"#result#reviewRating",
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5",
+              "ratingExplanation": ""
+            }
+          }
+        ]
+      }
+    }
+  );
+}
 const AddItem = ({ heading, dispatch }) => {
   const [isOpen, setOpen] = useState(false);
-  const [item, setItem] = useState({
-    id: uuidv4(),
-    enable: true,
-    name: '',
-    position: '',
-    phone: '',
-    email: '',
-    description: '',
-  });
+  const [item, setItem] = useState(emptyItem());
 
   const onChange = (key, value) => setItem(set({ ...item }, key, value));
 
   const onSubmit = () => {
-    if (item.name === '' || item.position === '') return;
+    if (_.get(item, 'interactionType.participant.givenName', '') === '') return;
 
-    addItem(dispatch, 'references', item);
+    addItem(dispatch, 'data.jsonld["@graph"][1].interactionStatistic', item);
 
-    setItem({
-      id: uuidv4(),
-      enable: true,
-      name: '',
-      position: '',
-      phone: '',
-      email: '',
-      description: '',
-    });
+    setItem(emptyItem());
 
     setOpen(false);
   };
@@ -168,11 +199,11 @@ const AddItem = ({ heading, dispatch }) => {
 
 const Item = ({ item, index, onChange, dispatch, first, last }) => {
   const [isOpen, setOpen] = useState(false);
-  const identifier = `data.references.items[${index}].`;
+  const identifier = `data.jsonld["@graph"][1].interactionStatistic[${index}].`;
 
   return (
     <div className="my-4 border border-gray-200 rounded p-5">
-      <ItemHeading title={item.name} setOpen={setOpen} isOpen={isOpen} />
+      <ItemHeading title={_.get(item, 'interactionType.participant.givenName', '')+" "+_.get(item, 'interactionType.participant.familyName', '')} setOpen={setOpen} isOpen={isOpen} />
 
       <div className={`mt-6 ${isOpen ? 'block' : 'hidden'}`}>
         <Form item={item} onChange={onChange} identifier={identifier} />
@@ -184,7 +215,7 @@ const Item = ({ item, index, onChange, dispatch, first, last }) => {
           item={item}
           last={last}
           onChange={onChange}
-          type="references"
+          type="data.jsonld['@graph'][1].interactionStatistic"
         />
       </div>
     </div>

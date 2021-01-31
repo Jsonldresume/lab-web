@@ -4,17 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import set from 'lodash/set';
 
 import TextField from '../../../shared/TextField';
+import Dropdown from '../../../shared/Dropdown';
 import AppContext from '../../../context/AppContext';
 import Checkbox from '../../../shared/Checkbox';
-import TextArea from '../../../shared/TextArea';
 import { addItem } from '../../../utils';
 import ItemActions from '../../../shared/ItemActions';
 import AddItemButton from '../../../shared/AddItemButton';
 import ItemHeading from '../../../shared/ItemHeading';
 
-import * as _  from 'lodash';
-
-const AwardsTab = ({ data, onChange }) => {
+const ContactsTab = ({ data, onChange }) => {
   const context = useContext(AppContext);
   const { dispatch } = context;
 
@@ -22,63 +20,77 @@ const AwardsTab = ({ data, onChange }) => {
     <>
       <div className="mb-6 grid grid-cols-6 items-center">
         <div className="col-span-1">
-          <Checkbox
-            checked={data.awards.enable}
-            onChange={v => onChange('data.awards.enable', v)}
-          />
+          <Checkbox checked={data.contacts.enable} onChange={v => onChange('data.contacts.enable', v)} />
         </div>
         <div className="col-span-5">
           <TextField
             placeholder="Heading"
-            value={data.awards.heading}
-            onChange={v => onChange('data.awards.heading', v)}
+            value={data.contacts.heading}
+            onChange={v => onChange('data.contacts.heading', v)}
           />
         </div>
       </div>
 
       <hr className="my-6" />
 
-      {_.get(data.jsonld["@graph"][0], 'award', []).map((x, index) => (
+      {data.jsonld["@graph"][1].contactPoint && data.jsonld["@graph"][1].contactPoint.filter(x=>(x.contactType==="Preferred")).map((x, index) => (
         <Item
-          item={x}
-          key={_.get(x, '@id', 'main')}
-          index={index}
-          onChange={onChange}
           dispatch={dispatch}
           first={index === 0}
-          last={index === _.size(_.get(data.jsonld["@graph"][0], 'award', [])) - 1}
+          index={index}
+          item={x}
+          key={x["@id"]}
+          last={index === data.jsonld["@graph"][1].contactPoint.length - 1}
+          onChange={onChange}
         />
       ))}
 
-      <AddItem heading={data.awards.heading} dispatch={dispatch} />
+      <AddItem heading={data.contacts.heading} dispatch={dispatch} />
     </>
   );
 };
 
 const Form = ({ item, onChange, identifier = '' }) => {
   const { t } = useTranslation(['leftSidebar', 'app']);
-
+  const ContactTypeOption = (x, index) => {
+    return (
+      <option key={x} value={x}>
+        {x}
+      </option>
+    );
+  };
   return (
     <div>
       <TextField
         className="mb-6"
-        label={t('awards.title.label')}
-        placeholder="Code For Good Hackathon"
-        value={_.get(item,'skill:title', "")}
-        onChange={v => onChange(`${identifier}['skill:title']`, v)}
+        label={t('profile.phone.label')}
+        placeholder="+1 (999)999-9999"
+        value={item.telephone}
+        onChange={v => onChange(`${identifier}telephone`, v)}
       />
 
       <TextField
         className="mb-6"
-        label={t('awards.subtitle.label')}
-        placeholder="First Place, National Level"
-        value={_.get(item, 'skill:nativeLabel', '')}
-        onChange={v => onChange(`${identifier}['skill:nativeLabel']`, v)}
+        label={t('profile.email.label')}
+        placeholder="info@jsonldresume.org"
+        value={item.email}
+        onChange={v => onChange(`${identifier}email`, v)}
       />
-
-      <TextArea
+      
+      <Dropdown
         className="mb-6"
-        label={t('app:item.description.label')}
+        label={t('profile.contactType.label')}
+        placeholder="Only preferred is shown on resume"
+        value={item.contactType}
+        onChange={v => onChange(`${identifier}contactType`, v)}
+        options = {["Preferred", "Emergency", "Other"]}
+        optionItem = {ContactTypeOption}
+      />
+      
+      <TextField
+        className="mb-6"
+        label={t('profile.contacts.description')}
+        placeholder="Description"
         value={item.description}
         onChange={v => onChange(`${identifier}description`, v)}
       />
@@ -86,29 +98,33 @@ const Form = ({ item, onChange, identifier = '' }) => {
   );
 };
 
-const emptyItem = () => {
-  let id = uuidv4();
-  return ({
-    "@type": "skill:Award",
-    "@id": "_:"+id+"#enable",
-    "skill:title": "",
-	"skill:nativeLabel": "",
-    description: ''
-  });
-};
-
 const AddItem = ({ heading, dispatch }) => {
+  let id = "_:"+uuidv4();
   const [isOpen, setOpen] = useState(false);
-  const [item, setItem] = useState(emptyItem());
+  const [item, setItem] = useState({
+    "@id": id,
+    "@type": "ContactPoint",
+    description: '',
+    contactType: 'Preferred',
+    email: '',
+    telephone: ''
+  });
 
   const onChange = (key, value) => setItem(set({ ...item }, key, value));
-
   const onSubmit = () => {
-    if (item["skill:title"] === '') return;
+    let id = "_:"+uuidv4();
+    if ( item.contactType === '' ) return;
 
-    addItem(dispatch, 'data.jsonld["@graph"][0]["award"]', item);
+    addItem(dispatch, 'data.jsonld["@graph"][1].contactPoint', item);
 
-    setItem(emptyItem());
+    setItem({
+      "@id": id,
+      "@type": "ContactPoint",
+      description: '',
+      contactType: 'Preferred',
+      email: '',
+      telephone: ''
+    });
 
     setOpen(false);
   };
@@ -135,11 +151,11 @@ const ItemActionEnable = (identifier, item, onChange) => {
 
 const Item = ({ item, index, onChange, dispatch, first, last }) => {
   const [isOpen, setOpen] = useState(false);
-  const identifier = `data.jsonld["@graph"][0].award[${index}].`;
+  const identifier = `data.jsonld["@graph"][1].contactPoint[${index}].`;
 
   return (
     <div className="my-4 border border-gray-200 rounded p-5">
-      <ItemHeading title={item["skill:title"]} setOpen={setOpen} isOpen={isOpen} />
+      <ItemHeading title={item.contactType || item.telephone} setOpen={setOpen} isOpen={isOpen} />
 
       <div className={`mt-6 ${isOpen ? 'block' : 'hidden'}`}>
         <Form item={item} onChange={onChange} identifier={identifier} />
@@ -151,7 +167,7 @@ const Item = ({ item, index, onChange, dispatch, first, last }) => {
           item={item}
           last={last}
           onChange={onChange}
-          type="data.jsonld['@graph'][0].award"
+          type="data.jsonld['@graph'][1].contactPoint"
           enableAction={ItemActionEnable}
         />
       </div>
@@ -159,4 +175,4 @@ const Item = ({ item, index, onChange, dispatch, first, last }) => {
   );
 };
 
-export default AwardsTab;
+export default ContactsTab;

@@ -3,11 +3,23 @@ import get from 'lodash/get';
 import set from 'lodash/set';
 import remove from 'lodash/remove';
 
-import demoData from '../assets/demo/data.json';
+import demoJsonldData from '../assets/demo/jsonlddata.json';
 import { move } from '../utils';
 
 const initialState = {
   data: {
+    jsonld:{
+      '@graph': [
+        {
+          
+        },
+        {
+          givenName:[{'@language': 'en', '@value':''}],
+          familyName: [{'@language': 'en', '@value':''}],
+          address: []
+        }
+      ]
+    },
     profile: {
       heading: 'Profile',
       photo: '',
@@ -22,6 +34,14 @@ const initialState = {
       phone: '',
       website: '',
       email: '',
+    },
+    contacts: {
+      "enable": true,
+      heading: "Contacts"
+    },
+    address: {
+      "enable": true,
+      heading: 'Address'
     },
     objective: {
       enable: true,
@@ -53,9 +73,9 @@ const initialState = {
       heading: 'Skills',
       items: [],
     },
-    hobbies: {
+    memberships: {
       enable: true,
-      heading: 'Hobbies',
+      heading: 'Memberships',
       items: [],
     },
     languages: {
@@ -98,21 +118,21 @@ const reducer = (state, { type, payload }) => {
     case 'migrate_section':
       return set({ ...newState }, `data.${payload.key}`, payload.value);
     case 'add_item':
-      items = get({ ...newState }, `data.${payload.key}.items`, []);
+      items = get({ ...newState }, `${payload.key}`, []);
       items.push(payload.value);
-      return set({ ...newState }, `data.${payload.key}.items`, items);
+      return set({ ...newState }, `${payload.key}`, items);
     case 'delete_item':
-      items = get({ ...newState }, `data.${payload.key}.items`, []);
+      items = get({ ...newState }, `${payload.key}`, []);
       remove(items, x => x.id === payload.value.id);
-      return set({ ...newState }, `data.${payload.key}.items`, items);
+      return set({ ...newState }, `${payload.key}`, items);
     case 'move_item_up':
-      items = get({ ...newState }, `data.${payload.key}.items`, []);
+      items = get({ ...newState }, `${payload.key}`, []);
       move(items, payload.value, -1);
-      return set({ ...newState }, `data.${payload.key}.items`, items);
+      return set({ ...newState }, `${payload.key}`, items);
     case 'move_item_down':
-      items = get({ ...newState }, `data.${payload.key}.items`, []);
+      items = get({ ...newState }, `${payload.key}`, []);
       move(items, payload.value, 1);
-      return set({ ...newState }, `data.${payload.key}.items`, items);
+      return set({ ...newState }, `${payload.key}`, items);
     case 'on_input':
       return set({ ...newState }, payload.key, payload.value);
     case 'save_data':
@@ -134,7 +154,7 @@ const reducer = (state, { type, payload }) => {
     case 'load_demo_data':
       return {
         ...newState,
-        ...demoData,
+        ...demoJsonldData,
       };
     case 'reset':
       return initialState;

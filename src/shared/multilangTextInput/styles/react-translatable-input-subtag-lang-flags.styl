@@ -1,0 +1,15 @@
+// must be on the root: specificity is too high otherwise,
+// by overriding other flag styles other libraries set
+// and we rely upon
+.flag-icon-lang-default
+  background-image url(flag-default.svg)
+
+.flag-icon-lang-default
+  background-image url(flag-lang-default.svg)
+
+.TranslatableInput
+  .Select
+    // Here you can place all your lang image preferences by adding a class.
+    // If missing, it fallbacks to flag-lang-default.svg
+    .flag-icon-lang-en
+      background-image url(flag-lang-en.svg)

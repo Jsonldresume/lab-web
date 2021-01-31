@@ -158,12 +158,12 @@ const Onyx = () => {
     </span>
   );
 
-  const Hobbies = () =>
-    data.hobbies &&
-    data.hobbies.enable && (
+  const Memberships = () =>
+    data.memberships &&
+    data.memberships.enable && (
       <div>
-        <Heading title={data.hobbies.heading} />
-        <div className="mt-1 flex flex-wrap">{data.hobbies.items.map(HobbyItem)}</div>
+        <Heading title={data.memberships.heading} />
+        <div className="mt-1 flex flex-wrap">{data.memberships.items.map(HobbyItem)}</div>
       </div>
     );
 
@@ -299,7 +299,7 @@ const Onyx = () => {
 
       <div className="grid grid-cols-2 gap-6">
         <Skills />
-        <Hobbies />
+        <Memberships />
       </div>
 
       <References />

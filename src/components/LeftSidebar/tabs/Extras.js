@@ -11,6 +11,8 @@ import ItemActions from '../../../shared/ItemActions';
 import ItemHeading from '../../../shared/ItemHeading';
 import AddItemButton from '../../../shared/AddItemButton';
 
+import * as _  from 'lodash';
+
 const ExtrasTab = ({ data, onChange }) => {
   const context = useContext(AppContext);
   const { dispatch } = context;
@@ -35,15 +37,15 @@ const ExtrasTab = ({ data, onChange }) => {
 
       <hr className="my-6" />
 
-      {data.extras.items.map((x, index) => (
+      {_.get(data.jsonld["@graph"][1], 'identifier', []).map((x, index) => (
         <Item
           item={x}
-          key={x.id}
+          key={_.get(x, '@id', 'main')}
           index={index}
           onChange={onChange}
           dispatch={dispatch}
           first={index === 0}
-          last={index === data.extras.items.length - 1}
+          last={index === _.get(data.jsonld["@graph"][1], 'identifier', []).length - 1}
         />
       ))}
 
@@ -61,43 +63,43 @@ const Form = ({ item, onChange, identifier = '' }) => {
         className="mb-6"
         label={t('extras.key.label')}
         placeholder="Date of Birth"
-        value={item.key}
-        onChange={v => onChange(`${identifier}key`, v)}
+        value={_.get(item, 'propertyID', '')}
+        onChange={v => onChange(`${identifier}propertyID`, v)}
       />
 
       <TextField
         className="mb-6"
         label={t('extras.value.label')}
         placeholder="6th August 1995"
-        value={item.value}
+        value={_.get(item, 'value', '')}
         onChange={v => onChange(`${identifier}value`, v)}
       />
     </div>
   );
 };
 
+const emptyItem = () => {
+  let id = uuidv4();
+  return ({
+    "@type": "PropertyValue",
+    "@id": "_:Extras_"+id,
+    "propertyID": "",
+    "value": ""
+  });
+}
+
 const AddItem = ({ heading, dispatch }) => {
   const [isOpen, setOpen] = useState(false);
-  const [item, setItem] = useState({
-    id: uuidv4(),
-    enable: true,
-    key: '',
-    value: '',
-  });
+  const [item, setItem] = useState(emptyItem());
 
   const onChange = (key, value) => setItem(items => set({ ...items }, key, value));
 
   const onSubmit = () => {
-    if (item.key === '' || item.value === '') return;
+    if (_.get(item, 'propertyID', '') === '' || _.get(item, 'value', '') === '') return;
 
-    addItem(dispatch, 'extras', item);
+    addItem(dispatch, 'data.jsonld["@graph"][1].identifier', item);
 
-    setItem({
-      id: uuidv4(),
-      enable: true,
-      key: '',
-      value: '',
-    });
+    setItem(emptyItem());
 
     setOpen(false);
   };
@@ -117,11 +119,11 @@ const AddItem = ({ heading, dispatch }) => {
 
 const Item = ({ item, index, onChange, dispatch, first, last }) => {
   const [isOpen, setOpen] = useState(false);
-  const identifier = `data.extras.items[${index}].`;
+  const identifier = `data.jsonld["@graph"][1].identifier[${index}].`;
 
   return (
     <div className="my-4 border border-gray-200 rounded p-5">
-      <ItemHeading title={item.key} setOpen={setOpen} isOpen={isOpen} />
+      <ItemHeading title={_.get(item, 'propertyID', '')} setOpen={setOpen} isOpen={isOpen} />
 
       <div className={`mt-6 ${isOpen ? 'block' : 'hidden'}`}>
         <Form item={item} onChange={onChange} identifier={identifier} />
@@ -133,7 +135,7 @@ const Item = ({ item, index, onChange, dispatch, first, last }) => {
           item={item}
           last={last}
           onChange={onChange}
-          type="extras"
+          type="data.jsonld['@graph'][1].identifier"
         />
       </div>
     </div>
