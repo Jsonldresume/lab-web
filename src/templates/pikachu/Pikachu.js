@@ -85,7 +85,7 @@ const Pikachu = () => {
     </span>
   );
 
-  const Hobbies = () =>
+  const Memberships = () =>
     data.hobbies &&
     data.hobbies.enable && (
       <div>
@@ -292,7 +292,7 @@ const Pikachu = () => {
           </div>
 
           <Skills />
-          <Hobbies />
+          <Memberships />
           <Languages />
           <Certifications />
         </div>

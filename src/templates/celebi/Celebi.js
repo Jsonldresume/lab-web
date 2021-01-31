@@ -253,14 +253,14 @@ const Celebi = () => {
       </div>
     );
 
-  const Hobbies = () =>
-    data.hobbies.enable && (
+  const Memberships = () =>
+    data.memberships.enable && (
       <div className="mb-6">
-        <Heading title="Hobbies" className="w-3/4 mx-auto" />
+        <Heading title="Memberships" className="w-3/4 mx-auto" />
         <ul className="list-none text-sm">
-          {data.hobbies.items.map(x => (
-            <li key={x.id} className="my-2">
-              {x.hobby}
+          {_.get(data.jsonld["@graph"][1], 'memberOf', []).map(x => (
+            <li key={_.get(x,'@id', '')} className="my-2">
+              {_.get(x, "memberOf.programName", "")}
             </li>
           ))}
         </ul>
@@ -333,7 +333,7 @@ const Celebi = () => {
     );
 
   const CertificationItem = x => (
-    <div key={x.id} className="my-2">
+    <div key={_.get(x,'@id','main')} className="my-2">
       <h6 className="font-semibold">{_.get(x, 'educationalLevel', '')}</h6>
       <p className="text-xs">{_.get(x, 'about.educationalCredentialAwarded', '')}</p>
       <ReactMarkdown className="mt-2 text-sm" source={_.get(x, 'abstract', '')} />
@@ -381,7 +381,7 @@ const Celebi = () => {
           <Photo />
           <Contact />
           <Skills />
-          <Hobbies />
+          <Memberships />
           <Languages />
           <Certifications />
           <Extras />

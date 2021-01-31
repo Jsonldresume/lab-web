@@ -73,9 +73,9 @@ const initialState = {
       heading: 'Skills',
       items: [],
     },
-    hobbies: {
+    memberships: {
       enable: true,
-      heading: 'Hobbies',
+      heading: 'Memberships',
       items: [],
     },
     languages: {

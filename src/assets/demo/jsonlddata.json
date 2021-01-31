@@ -282,9 +282,9 @@
                 }
             ]
         },
-        "hobbies": {
+        "memberships": {
             "enable": true,
-            "heading": "Hobbies",
+            "heading": "Memberships",
             "items": [
                 {
                     "id": "dd2efad7-e900-4384-bdc0-b2ab5f62bb71",
@@ -392,7 +392,7 @@
                 },
                 {
                     "id": "7f0a4971-9770-4ca7-b135-2b0ccd867879",
-                    "key": "Hobbies",
+                    "key": "Membership",
                     "value": "Playing Soccer & Guitar",
                     "enable": true
                 },

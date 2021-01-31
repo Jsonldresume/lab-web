@@ -193,7 +193,7 @@ const Glalie = () => {
     </li>
   );
 
-  const Hobbies = () =>
+  const Memberships = () =>
     data.hobbies &&
     data.hobbies.enable && (
       <div>
@@ -290,7 +290,7 @@ const Glalie = () => {
           </div>
           <ContactInformation />
           <Objective />
-          <Hobbies />
+          <Memberships />
           <Languages />
           <Certifications />
         </div>

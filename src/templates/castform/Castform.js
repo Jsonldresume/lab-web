@@ -99,12 +99,12 @@ const Castform = () => {
     </li>
   );
 
-  const Hobbies = () =>
-    data.hobbies &&
-    data.hobbies.enable && (
+  const Memberships = () =>
+    data.memberships &&
+    data.memberships.enable && (
       <div>
-        <Heading title={data.hobbies.heading} />
-        <ul className="list-none px-5">{data.hobbies.items.map(HobbyItem)}</ul>
+        <Heading title={data.memberships.heading} />
+        <ul className="list-none px-5">{data.memberships.items.map(HobbyItem)}</ul>
       </div>
     );
 
@@ -291,7 +291,7 @@ const Castform = () => {
           <PersonalInformation />
           <ContactInformation />
           <Skills />
-          <Hobbies />
+          <Memberships />
           <Languages />
           <Certifications />
         </div>

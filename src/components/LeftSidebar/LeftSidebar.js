@@ -10,12 +10,10 @@ import ObjectiveTab from './tabs/Objective';
 import WorkTab from './tabs/Work';
 import EducationTab from './tabs/Education';
 import AwardsTab from './tabs/Awards';
-import CertificationsTab from './tabs/Certifications';
-import SkillsTab from './tabs/Skills';
 import ExtrasTab from './tabs/Extras';
 import LanguagesTab from './tabs/Languages';
 import ReferencesTab from './tabs/References';
-import HobbiesTab from './tabs/Hobbies';
+import MembershipsTab from './tabs/Memberships';
 
 const LeftSidebar = () => {
   const context = useContext(AppContext);
@@ -30,7 +28,7 @@ const LeftSidebar = () => {
     { key: 'work', name: _.get(data, "work.heading", "Work") },
     { key: 'education', name: _.get(data, "education.heading", "Education") },
     { key: 'awards', name: _.get(data, "awards.heading", "Awards")  },
-    { key: 'hobbies', name: _.get(data, "hobbies.heading", "Hobbies") },
+    { key: 'memberships', name: _.get(data, "memberships.heading", "Memberships") },
     { key: 'languages', name: _.get(data, "languages.heading", "Languages") },
     { key: 'references', name: _.get(data, "references.heading", "References") },
     { key: 'extras', name: _.get(data, "extras.heading", "Extras") },
@@ -64,8 +62,8 @@ const LeftSidebar = () => {
         return <EducationTab data={data} onChange={onChange} />;
       case 'awards':
         return <AwardsTab data={data} onChange={onChange} />;
-      case 'hobbies':
-        return <HobbiesTab data={data} onChange={onChange} />;
+      case 'memberships':
+        return <MembershipsTab data={data} onChange={onChange} />;
       case 'languages':
         return <LanguagesTab data={data} onChange={onChange} />;
       case 'references':

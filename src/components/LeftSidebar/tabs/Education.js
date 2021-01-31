@@ -42,7 +42,7 @@ const EducationTab = ({ data, onChange }) => {
       {_.get(data.jsonld["@graph"][1], 'hasCredential', []).map((x, index) => (
         <Item
           item={x}
-          key={x.id}
+          key={_.get(x, '@id', 'item')}
           index={index}
           onChange={onChange}
           dispatch={dispatch}
