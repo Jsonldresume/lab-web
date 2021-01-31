@@ -1,11 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import Dropdown from './Dropdown';
 
 const TabBar = ({ tabs, currentTab, setCurrentTab }) => {
-  const tabsRef = useRef(null);
 
-  const scrollBy = (x) => {
+  const changeBy = (x) => {
     const index = tabs.findIndex((tab) => tab.key === currentTab);
-    tabsRef.current.scrollLeft += x;
 
     if (x < 0 && index > 0) {
       setCurrentTab(tabs[index - 1].key);
@@ -15,40 +14,35 @@ const TabBar = ({ tabs, currentTab, setCurrentTab }) => {
       setCurrentTab(tabs[index + 1].key);
     }
   };
-
+  const TabOption = (tab, index) => {
+    return (
+      <option key={tab.key} value={tab.key}>
+        {tab.name || 'Tab'}
+      </option>
+    );
+  };
   return (
     <div className="mx-4 mb-6 flex items-center">
       <div
         className="flex mr-1 cursor-pointer select-none text-gray-600 hover:text-gray-800"
-        onClick={() => scrollBy(-100)}
+        onClick={() => changeBy(-1)}
       >
         <i className="material-icons">chevron_left</i>
       </div>
-
-      <ul id="tabs" ref={tabsRef} className="flex overflow-x-scroll list-none">
-        {tabs.map((tab) =>
-          currentTab === tab.key ? (
-            <li key={tab.key} className="mx-1 list-none">
-              <div className="whitespace-no-wrap bg-gray-700 text-white rounded-md text-sm py-2 px-6 font-medium">
-                {tab.name || 'Tab'}
-              </div>
-            </li>
-          ) : (
-            <li key={tab.key} className="mx-1 list-none">
-              <div
-                className="bg-white whitespace-no-wrap rounded-md cursor-pointer text-sm py-2 px-6 font-medium hover:bg-gray-200"
-                onClick={() => setCurrentTab(tab.key)}
-              >
-                {tab.name || 'Tab'}
-              </div>
-            </li>
-          ),
-        )}
-      </ul>
+      
+        <Dropdown
+          className="mb-6"
+          label=''
+          placeholder=""
+          value={currentTab}
+          onChange={v => {setCurrentTab(v);}}
+          options = {tabs}
+          optionItem = {TabOption}
+        />
 
       <div
         className="flex ml-1 cursor-pointer select-none text-gray-600 hover:text-gray-800"
-        onClick={() => scrollBy(100)}
+        onClick={() => changeBy(1)}
       >
         <i className="material-icons">chevron_right</i>
       </div>
