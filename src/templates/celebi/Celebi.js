@@ -69,8 +69,6 @@ const Celebi = () => {
     <h6 className="text-lg tracking-wider uppercase">{((data.jsonld['@graph'][1].givenName[1]) ? (" ("+data.jsonld['@graph'][1].givenName.map(function(elem,index){
               if(index > 0 && elem['@value']){
                 let name = elem['@value'];
-                console.log(elem['@language']);
-                console.log(data.jsonld['@graph'][1].familyName);
                 let familynameIndex = data.jsonld['@graph'][1].familyName.findIndex(x=>x['@language']===elem['@language']);
                 if(familynameIndex >= 0){
                   if(data.jsonld['@graph'][1].familyName[familynameIndex] && data.jsonld['@graph'][1].familyName[familynameIndex]['@value']){
@@ -235,7 +233,7 @@ const Celebi = () => {
     data.education.enable && (
       <div className="mb-6">
         <Heading title={data.education.heading} />
-        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.get(x, 'credentialCategory', '')==="Degree")).map(EducationItem)}
+        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.get(x, 'credentialCategory', '')==="degree")).map(EducationItem)}
       </div>
     );
 
@@ -268,12 +266,12 @@ const Celebi = () => {
     );
 
   const ReferenceItem = x => (
-    <div key={x.id} className="flex flex-col">
-      <h6 className="text-sm font-semibold">{x.name}</h6>
-      <span className="text-sm">{x.position}</span>
-      <span className="text-sm">{x.phone}</span>
-      <span className="text-sm">{x.email}</span>
-      <ReactMarkdown className="mt-2 text-sm" source={x.description} />
+    <div key={_.get(x, '@id', 'main')} className="flex flex-col">
+      <h6 className="text-sm font-semibold">{_.get(x, 'interactionType.participant.givenName', '')} {_.get(x, 'interactionType.participant.familyName', '')}</h6>
+      <span className="text-sm">{_.get(x, 'interactionType.participant.jobTitle', '')}</span>
+      <span className="text-sm">{_.get(x, 'interactionType.participant.telephone', '')}</span>
+      <span className="text-sm">{_.get(x, 'interactionType.participant.email', '')}</span>
+      <ReactMarkdown className="mt-2 text-sm" source={_.get(x, 'result[0].reviewRating.ratingExplanation', '')} />
     </div>
   );
 
@@ -283,7 +281,7 @@ const Celebi = () => {
       <div className="mb-6">
         <Heading title={data.references.heading} />
         <div className="grid grid-cols-2 col-gap-4 row-gap-2">
-          {data.references.items.filter(x => x.enable).map(ReferenceItem)}
+          {_.get(data.jsonld["@graph"][1], 'interactionStatistic', []).filter(x => _.get(x, 'disambiguatingDescription', '')=== 'Reference').map(ReferenceItem)}
         </div>
       </div>
     );
@@ -350,9 +348,9 @@ const Celebi = () => {
     );
 
   const ExtraItem = x => (
-    <div key={x.id} className="my-3">
-      <h6 className="text-xs font-bold">{x.key}</h6>
-      <div className="text-sm">{x.value}</div>
+    <div key={_.get(x, '@id', 'main')} className="my-3">
+      <h6 className="text-xs font-bold">{_.get(x, 'propertyID', '')}</h6>
+      <div className="text-sm">{_.get(x, 'value', '')}</div>
     </div>
   );
 
@@ -361,7 +359,7 @@ const Celebi = () => {
     data.extras.enable && (
       <div className="mb-6">
         <Heading title={data.extras.heading} className="w-3/4 mx-auto" />
-        {data.extras.items.filter(x => x.enable).map(ExtraItem)}
+        {_.get(data.jsonld["@graph"][1], 'identifier', []).filter(x => x['value'] !== '').map(ExtraItem)}
       </div>
     );
 

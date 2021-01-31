@@ -25,8 +25,7 @@ const LanguagesTab = ({ data, onChange }) => {
           key: 'languages',
           value: {
             enable: false,
-            heading: 'Languages',
-            items: [],
+            heading: 'Languages'
           },
         },
       });

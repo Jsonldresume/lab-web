@@ -41,7 +41,7 @@ const AwardsTab = ({ data, onChange }) => {
       {_.get(data.jsonld["@graph"][0], 'award', []).map((x, index) => (
         <Item
           item={x}
-          key={x.id}
+          key={_.get(x, '@id', 'main')}
           index={index}
           onChange={onChange}
           dispatch={dispatch}
