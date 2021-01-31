@@ -9,11 +9,37 @@ import { move } from '../utils';
 const initialState = {
   data: {
     jsonld:{
+      "@context": [
+		"https://jsonldresume.github.io/skill/context.json",
+		{
+			"gender": {
+				"@id": "schema:gender",
+				"@type": "@vocab"
+			},
+			"skill:classOfAward": {
+				"@id": "skill:classOfAward",
+				"@type": "@vocab"
+			},
+			"skill:securityClearance": {
+				"@id": "skill:securityClearance",
+				"@type": "@vocab"
+			},
+			"category": {
+				"@id": "schema:category",
+				"@type": "@vocab"
+			},
+			"dayOfWeek": {
+				"@id": "schema:dayOfWeek",
+				"@type": "@vocab"
+			}
+		}
+      ],
       '@graph': [
         {
-          
+          "@type": "skill:Resume",
         },
         {
+          "@type": "Person",
           givenName:[{'@language': 'en', '@value':''}],
           familyName: [{'@language': 'en', '@value':''}],
           address: []

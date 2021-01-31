@@ -55,7 +55,7 @@ const AwardsTab = ({ data, onChange }) => {
   );
 };
 
-const Form = ({ item, onChange, identifier = '' }) => {
+const Form = ({ item, onChange, identifier = '', altidentifier='' }) => {
   const { t } = useTranslation(['leftSidebar', 'app']);
 
   return (
@@ -65,7 +65,7 @@ const Form = ({ item, onChange, identifier = '' }) => {
         label={t('awards.title.label')}
         placeholder="Code For Good Hackathon"
         value={_.get(item,'skill:title', "")}
-        onChange={v => onChange(`${identifier}['skill:title']`, v)}
+        onChange={v => {onChange(`${identifier}['skill:title']`, v);if(altidentifier!==''){onChange(`${altidentifier}`, v);} }}
       />
 
       <TextField
@@ -104,9 +104,10 @@ const AddItem = ({ heading, dispatch }) => {
   const onChange = (key, value) => setItem(set({ ...item }, key, value));
 
   const onSubmit = () => {
-    if (item["skill:title"] === '') return;
+    if (_.get(item, "skill:title", '') === '') return;
 
     addItem(dispatch, 'data.jsonld["@graph"][0]["award"]', item);
+    addItem(dispatch, 'data.jsonld["@graph"][1]["award"]', _.get(item, "skill:title", ''));
 
     setItem(emptyItem());
 
@@ -136,13 +137,14 @@ const ItemActionEnable = (identifier, item, onChange) => {
 const Item = ({ item, index, onChange, dispatch, first, last }) => {
   const [isOpen, setOpen] = useState(false);
   const identifier = `data.jsonld["@graph"][0].award[${index}].`;
+  const altidentifier = `data.jsonld["@graph"][1].award[${index}]`;
 
   return (
     <div className="my-4 border border-gray-200 rounded p-5">
       <ItemHeading title={item["skill:title"]} setOpen={setOpen} isOpen={isOpen} />
 
       <div className={`mt-6 ${isOpen ? 'block' : 'hidden'}`}>
-        <Form item={item} onChange={onChange} identifier={identifier} />
+        <Form item={item} onChange={onChange} identifier={identifier} altidentifier={altidentifier} />
 
         <ItemActions
           dispatch={dispatch}

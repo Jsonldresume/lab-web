@@ -167,7 +167,7 @@ const Celebi = () => {
         <p key={uuidv4()}>| {x} </p>
     )
   )
-    
+  
   const SectionSkills = ({skills}) => (
     skills && (skills.length>0) && (
       <div className="text-xs text-gray-800 flex">
@@ -236,15 +236,32 @@ const Celebi = () => {
         {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.get(x, 'credentialCategory', '')==="degree")).map(EducationItem)}
       </div>
     );
-
+  
+  const userSkills = () => {
+    let workSkills = _.chain(_.get(data, "jsonld['@graph'][1].hasOccupation", [])).map('skills').flatten();
+    
+    let awardSkills = _.chain(_.get(data, "jsonld['@graph'][0].award", [])).map('skill:assesses').flatten();
+    
+    let educationSkills = _.chain(_.get(data, "jsonld['@graph'][1].hasCredential", [])).map('teaches').flatten();
+    
+    let coursesSkills = _.chain(_.get(data, "jsonld['@graph'][1].hasCredential", [])).map('about').flatten().map('hasCourse').flatten().map('teaches').flatten();
+    
+    let educationProjectSkills = _.chain(_.get(data, "jsonld['@graph'][1].hasCredential", [])).map('about').map('workExample').flatten().map('hasPart').flatten().map('teaches').flatten();
+    
+    let interactionTeachSkills = _.chain(_.get(data, "jsonld['@graph'][1].interactionStatistic", [])).map('result').flatten().map('teaches').flatten();
+    
+    let interactionAssessSkills = _.chain(_.get(data, "jsonld['@graph'][1].interactionStatistic", [])).map('result').flatten().map('assesses').flatten();
+    
+    return [...workSkills, ...awardSkills, ...educationSkills, ...coursesSkills, ...educationProjectSkills, ...interactionTeachSkills, ...interactionAssessSkills];
+  }
   const Skills = () =>
     data.skills.enable && (
       <div className="mb-6">
         <Heading title="Skills" className="w-3/4 mx-auto" />
         <ul className="list-none text-sm">
-          {data.skills.items.map(x => (
-            <li key={x.id} className="my-2">
-              {x.skill}
+          {userSkills().map(x => (
+            <li key={uuidv4()} className="my-2">
+              {x}
             </li>
           ))}
         </ul>

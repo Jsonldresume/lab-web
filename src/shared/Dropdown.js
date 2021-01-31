@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Dropdown = ({ label, value, onChange, options, optionItem }) => (
-  <div className="flex flex-col mb-2">
+const Dropdown = ({ className, label, value, onChange, options, optionItem }) => (
+  <div className={"flex flex-col mb-2 "+ className} style={{display:'contents'}}>
     {label && (
       <label className="uppercase tracking-wide text-gray-600 text-xs font-semibold mb-2">
         {label}
