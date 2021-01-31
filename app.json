@@ -1,13 +1,13 @@
 {
-  "name": "Reactive Resume",
+  "name": "Json-ld Resume",
   "description": "A one-of-a-kind resume builder that's not out to get your data. Completely secure, customizable, portable, open-source and free forever.",
-  "website": "https://rxresu.me/",
-  "repository": "https://github.com/AmruthPillai/Reactive-Resume",
-  "logo": "https://i.imgur.com/ugpElge.png",
+  "website": "https://jsonldresume.org/",
+  "repository": "https://github.com/jsonldresume",
+  "logo": "https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/jsonldresume.png",
   "buildpacks": [
     {
       "url": "mars/create-react-app"
     }
   ],
-  "keywords": ["react", "resume", "static"]
+  "keywords": ["react", "resume", "static", "jsonld"]
 }
