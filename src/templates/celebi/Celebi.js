@@ -260,7 +260,7 @@ const Celebi = () => {
         <Heading title="Skills" className="w-3/4 mx-auto" />
         <ul className="list-none text-sm">
           {userSkills().map(x => (
-            <li key={x} className="my-2">
+            <li key={uuidv4()} className="my-2">
               {x}
             </li>
           ))}

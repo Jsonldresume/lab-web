@@ -8,6 +8,10 @@ import { useTranslation } from 'react-i18next';
 import PageContext from '../../../context/PageContext';
 import { importJson } from '../../../utils';
 
+import * as _  from 'lodash';
+import * as JSZip from 'jszip';
+import { saveAs } from 'file-saver';
+
 const ActionsTab = ({ data, theme, dispatch }) => {
   const pageContext = useContext(PageContext);
   const { setPrintDialogOpen } = pageContext;
@@ -15,11 +19,19 @@ const ActionsTab = ({ data, theme, dispatch }) => {
   const fileInputRef = useRef(null);
   
   const exportToJsonld = () => {
-    const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data.jsonld))}`;
-    const dlAnchor = document.getElementById('downloadAnchor');
-    dlAnchor.setAttribute('href', dataStr);
-    dlAnchor.setAttribute('download', `jsonldResume_${Date.now()}.json`);
-    dlAnchor.click();
+    let dataclone = _.cloneDeep(data.jsonld);
+    let javascript_part1 = '<script type="application/ld+json">'+JSON.stringify(dataclone)+"</script>";
+    _.set(dataclone['@graph'][1], "@context", "http://schema.org/");
+    let javascript_part2 = '<script type="application/ld+json">'+JSON.stringify(dataclone['@graph'][1])+"</script>";
+    
+    let javascript = javascript_part1 + javascript_part2;
+    var zip = new JSZip();
+    zip.file("script.js", javascript);
+    zip.file("resume.json", JSON.stringify(dataclone));
+    zip.generateAsync({type:"blob"})
+    .then(function(content) {
+        saveAs(content, "jsonldresume.zip");
+    });
   };
 
   const loadDemoData = () => {
