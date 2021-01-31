@@ -289,8 +289,8 @@ const Celebi = () => {
     );
 
   const LanguageItem = x => (
-    <div key={x.id} className="grid grid-cols-2 items-center py-2">
-      <h6 className="text-xs font-medium text-left">{x.key}</h6>
+    <div key={_.get(x, '@id', '')} className="grid grid-cols-2 items-center py-2">
+      <h6 className="text-xs font-medium text-left">{_.get(x, 'name', '')}</h6>
       <div className="flex">
         {x.level && <div className="font-bold text-sm mr-2">{x.level}</div>}
         {x.rating !== 0 && (
@@ -308,10 +308,10 @@ const Celebi = () => {
 
   const Languages = () =>
     data.languages &&
-    data.languages.enable && (
+    data.languages.enable && (_.get(data, 'jsonld["@graph"][1].knowsLanguage',[]).length > 0) && (
       <div className="w-3/4 mx-auto mb-6">
         <Heading title={data.languages.heading} />
-        <div>{data.languages.items.filter(x => x.enable).map(LanguageItem)}</div>
+        <div>{_.get(data, 'jsonld["@graph"][1].knowsLanguage', []).filter(x => _.get(x, 'name', '') !== '').map(LanguageItem)}</div>
       </div>
     );
 

@@ -6,11 +6,12 @@ import { v4 as uuidv4 } from 'uuid';
 import AppContext from '../../../context/AppContext';
 import AddItemButton from '../../../shared/AddItemButton';
 import Checkbox from '../../../shared/Checkbox';
-import Counter from '../../../shared/Counter';
 import ItemActions from '../../../shared/ItemActions';
 import ItemHeading from '../../../shared/ItemHeading';
 import TextField from '../../../shared/TextField';
 import { addItem } from '../../../utils';
+
+import * as _  from 'lodash';
 
 const LanguagesTab = ({ data, onChange }) => {
   const context = useContext(AppContext);
@@ -55,15 +56,15 @@ const LanguagesTab = ({ data, onChange }) => {
 
         <hr className="my-6" />
 
-        {data.languages.items.map((x, index) => (
+        {_.get(data.jsonld["@graph"][1], 'knowsLanguage', []).map((x, index) => (
           <Item
             item={x}
-            key={x.id}
+            key={_.get(x,'@id', 'item')}
             index={index}
             onChange={onChange}
             dispatch={dispatch}
             first={index === 0}
-            last={index === data.languages.items.length - 1}
+            last={index === _.size(_.get(data.jsonld["@graph"][1], 'knowsLanguage', [])) - 1}
           />
         ))}
 
@@ -82,61 +83,34 @@ const Form = ({ item, onChange, identifier = '' }) => {
         className="mb-6"
         label={t('languages.key.label')}
         placeholder="English"
-        value={item.key}
-        onChange={v => onChange(`${identifier}key`, v)}
-      />
-
-      <TextField
-        className="mb-6"
-        label={t('languages.level.label')}
-        placeholder="B1"
-        value={item.level}
-        onChange={v => onChange(`${identifier}level`, v)}
-      />
-
-      <Counter
-        className="mb-6"
-        label={t('languages.rating.label')}
-        value={item.rating}
-        onDecrement={() =>
-          item.rating > 1
-            ? onChange(`${identifier}rating`, item.rating - 1)
-            : onChange(`${identifier}rating`, 0)
-        }
-        onIncrement={() =>
-          item.rating < 5
-            ? onChange(`${identifier}rating`, item.rating + 1)
-            : onChange(`${identifier}rating`, 0)
-        }
+        value={_.get(item,'name', '')}
+        onChange={v => onChange(`${identifier}name`, v)}
       />
     </div>
   );
 };
 
+const emptyItem = () => {
+  let id = uuidv4();
+  return ({
+    "@type": "Language",
+    "@id": "_:"+id,
+    "name": ""
+  });
+}
 const AddItem = ({ heading, dispatch }) => {
   const [isOpen, setOpen] = useState(false);
-  const [item, setItem] = useState({
-    id: uuidv4(),
-    enable: true,
-    key: '',
-    value: '',
-    rating: 1,
-  });
+  
+  const [item, setItem] = useState(emptyItem());
 
   const onChange = (key, value) => setItem(items => set({ ...items }, key, value));
 
   const onSubmit = () => {
-    if (item.key === '') return;
+    if (_.get(item, 'name', '') === '') return;
 
-    addItem(dispatch, 'languages', item);
+    addItem(dispatch, 'data.jsonld["@graph"][1].knowsLanguage', item);
 
-    setItem({
-      id: uuidv4(),
-      enable: true,
-      key: '',
-      value: '',
-      rating: 1,
-    });
+    setItem(emptyItem());
 
     setOpen(false);
   };
@@ -156,11 +130,11 @@ const AddItem = ({ heading, dispatch }) => {
 
 const Item = ({ item, index, onChange, dispatch, first, last }) => {
   const [isOpen, setOpen] = useState(false);
-  const identifier = `data.languages.items[${index}].`;
+  const identifier = `data.jsonld["@graph"][1].knowsLanguage[${index}].`;
 
   return (
     <div className="my-4 border border-gray-200 rounded p-5">
-      <ItemHeading title={item.key} setOpen={setOpen} isOpen={isOpen} />
+      <ItemHeading title={_.get(item, 'name', '')} setOpen={setOpen} isOpen={isOpen} />
 
       <div className={`mt-6 ${isOpen ? 'block' : 'hidden'}`}>
         <Form item={item} onChange={onChange} identifier={identifier} />
@@ -172,7 +146,7 @@ const Item = ({ item, index, onChange, dispatch, first, last }) => {
           item={item}
           last={last}
           onChange={onChange}
-          type="languages"
+          type="data.jsonld['@graph'][1].knowsLanguage"
         />
       </div>
     </div>
