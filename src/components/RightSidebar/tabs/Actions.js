@@ -27,7 +27,7 @@ const ActionsTab = ({ data, theme, dispatch }) => {
     let javascript = javascript_part1 + javascript_part2;
     var zip = new JSZip();
     zip.file("script.js", javascript);
-    zip.file("resume.json", JSON.stringify(dataclone));
+    zip.file("resume.json", JSON.stringify(data));
     zip.generateAsync({type:"blob"})
     .then(function(content) {
         saveAs(content, "jsonldresume.zip");
