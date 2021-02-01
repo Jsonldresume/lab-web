@@ -1,13 +1,13 @@
 module.exports = {
-  title: 'Reactive Resume',
+  title: 'Json-ld Resume',
   description:
     "A one-of-a-kind resume builder that's not out to get your data. Completely secure, customizable, portable, open-source and free forever.",
   themeConfig: {
     logo: '/logo.png',
-    repo: 'AmruthPillai/Reactive-Resume',
+    repo: 'jsonldresume/lab-web',
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Go to App', link: 'https://rxresu.me/' },
+      { text: 'Go to App', link: 'https://jsonldresume.org/' },
     ],
     sidebar: [
       '/',
@@ -23,11 +23,6 @@ module.exports = {
     smoothScroll: true,
   },
   plugins: [
-    [
-      '@vuepress/google-analytics',
-      {
-        ga: 'UA-161860275-1',
-      },
-    ],
+    
   ],
 };

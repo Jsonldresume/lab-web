@@ -14,7 +14,7 @@ const AboutTab = () => {
         <a
           target="_blank"
           rel="noopener noreferrer"
-          href="https://docs.rxresu.me/"
+          href="https://docs.jsonldresume.org/"
           className="flex justify-center items-center mt-4 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium py-2 px-5 rounded"
         >
           <div className="flex justify-center items-center">

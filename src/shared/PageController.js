@@ -48,7 +48,7 @@ const PageController = () => {
 
         <a
           className="p-3 hover:bg-gray-200 cursor-pointer flex"
-          href="https://docs.rxresu.me/"
+          href="https://doc.jsonldresume.org/"
           target="_blank"
           rel="noopener noreferrer"
         >

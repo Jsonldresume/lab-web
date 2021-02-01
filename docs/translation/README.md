@@ -9,7 +9,6 @@ Translating the app into your own language has never been easier. The project ma
 ::: tip TL;DR
 If you are already familiar with the Crowdin platform and want to contribute your time to translating a few strings, just head to the link below and get started!
 
-### **[translate.rxresu.me](https://translate.rxresu.me/)**
 
 :::
 
@@ -57,7 +56,7 @@ If you are already familiar with the Crowdin platform and want to contribute you
 - Ukrainian `uk`
 
 ::: warning
-If your language is not available in the list above, send me an email at <a href="mailto:im.amruth@gmail.com">im.amruth@gmail.com</a> with your request or raise an issue on GitHub and I'll add it on the Crowdin Platform.
+If your language is not available in the list above, send me an email at <a href="mailto:info@jsonldresume.org">info@jsonldresume.org</a> with your request or raise an issue on GitHub and I'll add it on the Crowdin Platform.
 :::
 
 ## Translating through Crowdin
@@ -68,7 +67,7 @@ If your language is not available in the list above, send me an email at <a href
   <img src="./images/language-options.png" alt="Choose your Language" width="50%" />
 </p>
 
-As mentioned above, all you need to do is go to the [Translation Portal ](https://translate.rxresu.me/) of Reactive Resume and select the language you want to begin translating to.
+As mentioned above, all you need to do is go to the [Translation Portal ](https://translate.jsonldresume.org/) of Jsonld Resume and select the language you want to begin translating to.
 
 ### Step 2: Click on `Translate All`
 
@@ -120,7 +119,7 @@ For those who don't want to go through the process of creating an account with C
 
 ### Step 1: Choose your Language
 
-Go to the `src/i18n/locales` folder in the master branch of the repository and choose the language of your choice. Alternatively, you can [click this link](https://github.com/AmruthPillai/Reactive-Resume/tree/master/src/i18n/locales) to go the specific folder in GitHub.
+Go to the `src/i18n/locales` folder in the master branch of the repository and choose the language of your choice. Alternatively, you can [click this link](https://github.com/jsonldresume/lab-web/tree/master/src/i18n/locales) to go the specific folder in GitHub.
 
 Be careful as the folder only contains ISO-639-1 Two Letter Language Codes, so refer the [list above](#current-status) to find the corresponding language folder.
 
