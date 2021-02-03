@@ -130,6 +130,107 @@ const initialState = {
       primary: '#212121',
       accent: '#f44336',
     },
+		"layoutblocks": {
+			"onyx": [
+				[
+					"objective",
+					"work",
+					"education",
+					"projects"
+				],
+				[
+					"hobbies",
+					"languages",
+					"awards",
+					"certifications"
+				],
+				[
+					"skills",
+					"references"
+				]
+			],
+			"pikachu": [
+				[
+					"skills",
+					"languages",
+					"hobbies",
+					"awards",
+					"certifications"
+				],
+				[
+					"work",
+					"education",
+					"projects",
+					"references"
+				]
+			],
+			"gengar": [
+				[
+					"objective",
+					"skills"
+				],
+				[
+					"awards",
+					"certifications",
+					"languages",
+					"references",
+					"hobbies"
+				],
+				[
+					"work",
+					"education",
+					"projects"
+				]
+			],
+			"castform": [
+				[
+					"awards",
+					"certifications",
+					"languages",
+					"hobbies"
+				],
+				[
+					"objective",
+					"work",
+					"education",
+					"skills",
+					"projects",
+					"references"
+				]
+			],
+			"glalie": [
+				[
+					"awards",
+					"certifications",
+					"hobbies"
+				],
+				[
+					"objective",
+					"work",
+					"education",
+					"skills",
+					"projects",
+					"languages",
+					"references"
+				]
+			],
+			"celebi": [
+				[
+					"awards",
+					"certifications",
+					"languages",
+					"hobbies"
+				],
+				[
+					"objective",
+					"work",
+					"education",
+					"skills",
+					"projects",
+					"references"
+				]
+			]
+		}
   },
   settings: {
     language: 'en',

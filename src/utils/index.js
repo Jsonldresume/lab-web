@@ -1,6 +1,8 @@
 /* eslint-disable new-cap */
+import { get, isEmpty } from 'lodash';
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf';
+import dayjs from 'dayjs';
 
 const move = (array, element, delta) => {
   const index = array.findIndex(item => item.id === element.id);
@@ -199,6 +201,30 @@ const saveAsMultiPagePdf = (pageRef, panZoomRef, quality) => {
   });
 }
 
+const formatDate = ({ date, language = 'en', includeDay = false }) => {
+  const template = includeDay ? 'DD MMMM YYYY' : 'MMMM YYYY';
+
+  return dayjs(date).locale(language.substr(0, 2)).format(template);
+};
+
+const formatDateRange = ({ startDate, endDate, language = 'en' }, t) => {
+  const start = `${dayjs(startDate)
+    .locale(language.substr(0, 2))
+    .format('MMMM YYYY')}`;
+
+  const end = dayjs(endDate).isValid()
+    ? `${dayjs(endDate).locale(language.substr(0, 2)).format('MMMM YYYY')}`
+    : t('shared.forms.present');
+
+  return `${start} - ${end}`;
+};
+
+const hasAddress = (address) =>
+  !!address.line1 || !!address.line2 || !!address.city || !!address.pincode;
+  
+const safetyCheck = (section, path = 'items') =>
+  !!(section && section.enable === true);
+
 export {
   move,
   hexToRgb,
@@ -211,4 +237,8 @@ export {
   importJson,
   saveAsPdf,
   saveAsMultiPagePdf,
+  formatDate,
+  formatDateRange,
+  hasAddress,
+  safetyCheck
 };

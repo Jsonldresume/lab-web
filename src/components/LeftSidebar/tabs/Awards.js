@@ -71,9 +71,9 @@ const Form = ({ item, onChange, identifier = '', altidentifier='' }) => {
       <TextField
         className="mb-6"
         label={t('awards.subtitle.label')}
-        placeholder="First Place, National Level"
-        value={_.get(item, 'skill:nativeLabel', '')}
-        onChange={v => onChange(`${identifier}['skill:nativeLabel']`, v)}
+        placeholder="Google"
+        value={_.get(item, 'skill:conferredBy', '')}
+        onChange={v => onChange(`${identifier}['skill:conferredBy']`, v)}
       />
 
       <TextArea

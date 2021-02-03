@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ReactMarkdown from 'react-markdown';
 
@@ -33,16 +34,10 @@ const Celebi = () => {
   const context = useContext(AppContext);
   const { state } = context;
   const { data, theme } = state;
+  
+  const { t } = useTranslation();
 
   const { r, g, b } = hexToRgb(theme.colors.accent) || {};
-
-  const Heading = ({ title, className }) => (
-    <h5
-      className={`my-2 text-md uppercase font-semibold tracking-wider pb-1 border-b-2 border-gray-800 ${className}`}
-    >
-      {title}
-    </h5>
-  );
 
   const Photo = () =>
     (_.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' && (
@@ -98,6 +93,14 @@ const Celebi = () => {
         <h6 className="text-lg tracking-wider uppercase">{_.get(data, 'jsonld["@graph"][1].description', "")}</h6>
       </div>
     </header>
+  );
+  
+  const Heading = ({ title, className }) => (
+    <h5
+      className={`my-2 text-md uppercase font-semibold tracking-wider pb-1 border-b-2 border-gray-800 ${className}`}
+    >
+      {title}
+    </h5>
   );
   
   const Objective = () =>
