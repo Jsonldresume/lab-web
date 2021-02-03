@@ -12,6 +12,7 @@ import ProjectsA from '../blocks/Projects/ProjectsA';
 import ReferencesA from '../blocks/References/ReferencesA';
 import SkillsA from '../blocks/Skills/SkillsA';
 import WorkA from '../blocks/Work/WorkA';
+import AddressA from '../blocks/Address/AddressA';
 
 import PageContext from '../../context/PageContext';
 import { hasAddress } from '../../utils';
@@ -69,16 +70,7 @@ const Onyx = () => {
               <h6 className="font-medium text-sm">{_.get(data, 'jsonld["@graph"][1].description', "")}</h6>
 
               {hasAddress(data.profile.address) && (
-                <div className="flex flex-col mt-4 text-xs">
-                  <h6 className="font-bold text-xs uppercase tracking-wide mb-1">
-                    {t('shared.forms.address')}
-                  </h6>
-                  <span>{data.profile.address.line1}</span>
-                  <span>{data.profile.address.line2}</span>
-                  <span>
-                    {data.profile.address.city} {data.profile.address.pincode}
-                  </span>
-                </div>
+                <AddressA data={data} mainclassName="flex flex-col mt-4 text-xs" hclassName="font-bold text-xs uppercase tracking-wide mb-1" subclassName="" />
               )}
             </div>
           </div>

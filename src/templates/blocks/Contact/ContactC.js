@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import PageContext from '../../../context/PageContext';
 import { hasAddress, safetyCheck } from '../../../utils';
 import BirthDateA from '../BirthDate/BirthDateA';
+import AddressA from '../Address/AddressA';
 import * as _  from 'lodash';
 
 const ContactItem = ({ value, label, link }) =>
@@ -19,36 +20,13 @@ const ContactItem = ({ value, label, link }) =>
     </div>
   ) : null;
   
-const AddressItem = (x, index) => (
-    (
-      <div className="flex flex-col text-xs" key={"addressitem_"+index}>
-        <span>{x.streetAddress}</span>
-        <span>{x.addressLocality} {x.addressRegion}</span>
-        <span>{x.addressCountry} {x.postalCode}</span>
-      </div>
-    )
-);
-
-const Address = ({data}) => (
-    (
-      data.jsonld["@graph"][1].address && data.jsonld["@graph"][1].address.length>0 &&
-      data.address.enable && (
-        <div>
-          <h6 className="capitalize font-semibold">{data.profile.address.heading || "Address"}</h6>
-          
-          {data.jsonld["@graph"][1].address.filter(x => (Date.parse(x.hoursAvailable.validThrough) - Date.parse(new Date()))>0).map(AddressItem)}
-        </div>
-      )
-    ) || ("")
-);
-  
 const ContactC = () => {
   const { t } = useTranslation();
   const { data } = useContext(PageContext);
 
   return (
     <div className="text-xs grid gap-2">
-        <Address data={data} />
+        <AddressA data={data} />
 
       <ContactItem
         label={data.profile.phone.heading || "Phone"}

@@ -41,23 +41,21 @@ const Castform = () => {
   const layout = _.get(theme,'layoutblocks.castform', []);
 
   const Photo = () =>
-    data.profile.photograph !== '' && (
+    _.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' && (
       <img
         className="w-32 h-32 rounded-full"
         style={{
           borderWidth: 6,
           borderColor: theme.colors.background,
         }}
-        src={data.profile.photograph}
-        alt={data.profile.firstName}
+        src={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
+        alt="Resume Photograph"
       />
     );
 
   const Profile = () => (
     <div>
-      <h1 className="text-2xl font-bold">
-        {data.profile.firstName} {data.profile.lastName}
-      </h1>
+      <NamesA data={data} className="text-2xl font-bold"/>
       <h5>{data.profile.subtitle}</h5>
     </div>
   );
