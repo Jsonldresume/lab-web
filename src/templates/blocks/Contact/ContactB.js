@@ -19,7 +19,7 @@ const ContactItem = ({ value, icon, link }) => {
       <Icon
         size="10px"
         className="mr-2"
-        style={{ color: data.metadata.colors.background }}
+        style={{ color: theme.colors.background }}
       />
       {link ? (
         <a href={link} target="_blank" rel="noopener noreferrer">

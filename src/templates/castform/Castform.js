@@ -46,7 +46,7 @@ const Castform = () => {
         className="w-32 h-32 rounded-full"
         style={{
           borderWidth: 6,
-          borderColor: data.metadata.colors.background,
+          borderColor: theme.colors.background,
         }}
         src={data.profile.photograph}
         alt={data.profile.firstName}
@@ -68,17 +68,17 @@ const Castform = () => {
         id="page"
         className="rounded"
         style={{
-          fontFamily: data.metadata.font,
-          color: data.metadata.colors.text,
-          backgroundColor: data.metadata.colors.background,
+          fontFamily: theme.font.family,
+          color: theme.colors.primary,
+          backgroundColor: theme.colors.background,
         }}
       >
         <div className="grid grid-cols-12">
           <div
             className="col-span-4 py-8 pr-8 pl-5"
             style={{
-              color: data.metadata.colors.background,
-              backgroundColor: data.metadata.colors.primary,
+              color: theme.colors.background,
+              backgroundColor: theme.colors.primary,
             }}
           >
             <div className="grid gap-4">

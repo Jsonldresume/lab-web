@@ -22,7 +22,7 @@ const ContactItem = ({ value, label, link }) =>
 
 const AddressItem = (x, index) => (
     (
-      <div className="flex flex-col text-xs">
+      <div className="flex flex-col text-xs" key={index}>
         <span>{x.streetAddress}</span>
         <span>{x.addressLocality} {x.addressRegion}</span>
         <span>{x.addressCountry} {x.postalCode}</span>

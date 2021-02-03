@@ -4,7 +4,6 @@ import Gengar, { Image as GengarPreview } from './gengar';
 import Castform, { Image as CastformPreview } from './castform';
 import Glalie, { Image as GlaliePreview } from './glalie';
 import Celebi, { Image as CelebiPreview } from './celebi';
-import Celebi2, { Image as CelebiPreview2 } from './celebi2';
 
 export default [
   {
@@ -42,11 +41,5 @@ export default [
     name: 'Celebi',
     component: Celebi,
     preview: CelebiPreview,
-  },
-  {
-    key: 'celebi2',
-    name: 'Celebi2',
-    component: Celebi2,
-    preview: CelebiPreview2,
   },
 ];

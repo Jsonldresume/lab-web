@@ -41,7 +41,7 @@ const Glalie = () => {
   const { data, theme } = state;
   const layout = _.get(theme,'layoutblocks.glalie', []);
   
-  const { r, g, b } = hexToRgb(data.metadata.colors.primary) || {};
+  const { r, g, b } = hexToRgb(theme.colors.primary) || {};
 
   const Profile = () => (
     <div className="grid gap-2 text-center">
@@ -68,9 +68,9 @@ const Glalie = () => {
         id="page"
         className="rounded"
         style={{
-          fontFamily: data.metadata.font,
-          color: data.metadata.colors.text,
-          backgroundColor: data.metadata.colors.background,
+          fontFamily: theme.font.family,
+          color: theme.colors.primary,
+          backgroundColor: theme.colors.background,
         }}
       >
         <div className="grid grid-cols-12">

@@ -13,7 +13,7 @@ const ReferenceItem = (x) => (
     <span className="text-xs">{_.get(x, 'interactionType.participant.telephone', '')}</span>
     <span className="text-xs">{_.get(x, 'interactionType.participant.email', '')}</span>
     {_.get(x, 'result[0].reviewRating.ratingExplanation', '')!=='' && (
-      <ReactMarkdown className="markdown mt-2 text-sm" source={x.summ_.get(x, 'result[0].reviewRating.ratingExplanation', '')} />
+      <ReactMarkdown className="markdown mt-2 text-sm" source={_.get(x, 'result[0].reviewRating.ratingExplanation', '')} />
     )}
   </div>
 );

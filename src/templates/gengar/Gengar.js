@@ -41,14 +41,14 @@ const Gengar = () => {
   const { data, theme } = state;
   const layout = _.get(theme,'layoutblocks.gengar', []);
   
-  const { r, g, b } = hexToRgb(data.metadata.colors.primary) || {};
+  const { r, g, b } = hexToRgb(theme.colors.primary) || {};
 
   const Photo = () =>
     data.profile.photograph !== '' && (
       <img
         className="w-24 h-24 rounded-full mr-4 object-cover border-4"
         style={{
-          borderColor: data.metadata.colors.background,
+          borderColor: theme.colors.background,
         }}
         src={data.profile.photograph}
         alt={data.profile.firstName}
@@ -73,17 +73,17 @@ const Gengar = () => {
         id="page"
         className="rounded"
         style={{
-          fontFamily: data.metadata.font,
-          color: data.metadata.colors.text,
-          backgroundColor: data.metadata.colors.background,
+          fontFamily: theme.font.family,
+          color: theme.colors.primary,
+          backgroundColor: theme.colors.background,
         }}
       >
         <div className="grid grid-cols-12">
           <div
             className="col-span-4 px-6 py-8"
             style={{
-              backgroundColor: data.metadata.colors.primary,
-              color: data.metadata.colors.background,
+              backgroundColor: theme.colors.primary,
+              color: theme.colors.background,
             }}
           >
             <div className="flex items-center">
@@ -106,7 +106,7 @@ const Gengar = () => {
 
             <hr
               className="w-1/4 my-5 opacity-25"
-              style={{ borderColor: data.metadata.colors.background }}
+              style={{ borderColor: theme.colors.background }}
             />
 
             <h6 className="font-bold text-xs uppercase tracking-wide mb-2">
