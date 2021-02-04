@@ -26,23 +26,23 @@ OR
 docker-compose up -d --build
 ```
 
-You can also alternatively pull the image from [Docker Hub](https://hub.docker.com/r/amruthpillai/reactive-resume) where the latest image is always built from source control.
+You can also alternatively pull the image from [Docker Hub](https://hub.docker.com/r/jsonldresume/lab-web) where the latest image is always built from source control.
 
 ```
-docker pull amruthpillai/reactive-resume
+docker pull jsonldresume/lab-web
 ```
 
 ## Deploying to Heroku
 
 Heroku is a cloud platform that lets companies build, deliver, monitor and scale apps — we're the fastest way to go from idea to URL, bypassing all those infrastructure headaches.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/AmruthPillai/Reactive-Resume)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/jsonldresume/lab-web)
 
 ## Deploying to Netlify
 
 Used by more than 800,000 web developers and businesses, the Netlify platform provides modern build workflows, serverless functions and a global Application Delivery Network to deliver the most performant, secure and scalable websites and applications.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/AmruthPillai/Reactive-Resume)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jsonldresume/lab-web)
 
 ## Deploy to Synology NAS
 
