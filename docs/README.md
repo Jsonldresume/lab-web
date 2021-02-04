@@ -2,7 +2,7 @@
 title: Home
 ---
 
-<img src="./images/logo.png" width="256px">
+<img src="https://raw.githubusercontent.com/Jsonldresume/lab-web/main/public/images/jsonldresume.png" width="256px">
 
 # Reactive Resume
 
