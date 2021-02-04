@@ -56,7 +56,8 @@ const Castform = () => {
   const Profile = () => (
     <div>
       <NamesA data={data} className="text-2xl font-bold"/>
-      <h5>{data.profile.subtitle}</h5>
+      <SubNamesA data={data} />
+      <h5>{_.get(data, 'jsonld["@graph"][1].description', "")}</h5>
     </div>
   );
 

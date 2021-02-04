@@ -17,7 +17,7 @@ import WorkA from '../blocks/Work/WorkA';
 import PageContext from '../../context/PageContext';
 
 import AppContext from '../../context/AppContext';
-import NamesA from '../blocks/Names/NamesA';
+import NamesB from '../blocks/Names/NamesB';
 import SubNamesA from '../blocks/Names/SubNamesA';
 import * as _  from 'lodash';
 
@@ -45,19 +45,19 @@ const Glalie = () => {
 
   const Profile = () => (
     <div className="grid gap-2 text-center">
-      {data.profile.photograph !== '' && (
+      {_.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' && (
         <img
           className="w-40 h-40 rounded-full mx-auto"
-          src={data.profile.photograph}
-          alt={data.profile.firstName}
+          src={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
+          alt="Resume Photograph"
         />
       )}
       <div className="text-4xl font-bold leading-none">
-        <h1>{data.profile.firstName}</h1>
-        <h1>{data.profile.lastName}</h1>
+        <NamesB data={data} className=""/>
+        <SubNamesA data={data} />
       </div>
       <div className="tracking-wide text-xs uppercase font-medium">
-        {data.profile.subtitle}
+        {_.get(data, 'jsonld["@graph"][1].description', "")}
       </div>
     </div>
   );

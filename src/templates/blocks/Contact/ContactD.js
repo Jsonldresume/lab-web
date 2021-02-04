@@ -4,6 +4,7 @@ import { MdFlare } from 'react-icons/md';
 import AppContext from '../../../context/AppContext';
 import { hasAddress, safetyCheck } from '../../../utils';
 import BirthDateA from '../BirthDate/BirthDateA';
+import AddressA from '../Address/AddressA';
 import * as _  from 'lodash';
 
 const ContactItem = ({ value, label, link }) =>
@@ -19,29 +20,6 @@ const ContactItem = ({ value, label, link }) =>
       )}
     </div>
   ) : null;
-
-const AddressItem = (x, index) => (
-    (
-      <div className="flex flex-col text-xs" key={index}>
-        <span>{x.streetAddress}</span>
-        <span>{x.addressLocality} {x.addressRegion}</span>
-        <span>{x.addressCountry} {x.postalCode}</span>
-      </div>
-    )
-);
-
-const Address = ({data}) => (
-    (
-      data.jsonld["@graph"][1].address && data.jsonld["@graph"][1].address.length>0 &&
-      _.get(data, 'address.enable', true) && (
-        <div>
-          <h6 className="capitalize font-semibold">{data.profile.address.heading || "Address"}</h6>
-          
-          {data.jsonld["@graph"][1].address.filter(x => (Date.parse(x.hoursAvailable.validThrough) - Date.parse(new Date()))>0).map(AddressItem)}
-        </div>
-      )
-    ) || ("")
-);
 
 const ContactD = () => {
   const { t } = useTranslation();
@@ -68,22 +46,22 @@ const ContactD = () => {
         <MdFlare size="20px" />
       </div>
 
-        <Address data={data} />
+        <AddressA data={data}  />
 
       <ContactItem
-        label={data.profile.phone.heading || "Phone"}
-        value={data.profile.phone}
-        link={`tel:${data.profile.phone}`}
+        label={_.get(data,'profile.phone.heading', t("Phone"))}
+        value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")}
+        link={`tel:${_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")}`}
       />
       <ContactItem
-        label={data.profile.phone.heading || "Website"}
-        value={data.profile.website}
-        link={data.profile.website}
+        label={_.get(data,'profile.website.heading', t("Website"))}
+        value={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")}
+        link={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")}
       />
       <ContactItem
-        label={data.profile.phone.heading || "Email"}
-        value={data.profile.email}
-        link={`mailto:${data.profile.email}`}
+        label={_.get(data,'profile.email.heading' ,t("Email"))}
+        value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")}
+        link={`mailto:${_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")}`}
       />
 
       <BirthDateA />

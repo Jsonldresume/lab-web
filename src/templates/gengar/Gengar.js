@@ -17,8 +17,9 @@ import WorkA from '../blocks/Work/WorkA';
 import PageContext from '../../context/PageContext';
 
 import AppContext from '../../context/AppContext';
-import NamesA from '../blocks/Names/NamesA';
+import NamesB from '../blocks/Names/NamesB';
 import SubNamesA from '../blocks/Names/SubNamesA';
+import AddressA from '../blocks/Address/AddressA';
 import * as _  from 'lodash';
 
 const Blocks = {
@@ -44,26 +45,22 @@ const Gengar = () => {
   const { r, g, b } = hexToRgb(theme.colors.primary) || {};
 
   const Photo = () =>
-    data.profile.photograph !== '' && (
+    _.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' && (
       <img
         className="w-24 h-24 rounded-full mr-4 object-cover border-4"
         style={{
           borderColor: theme.colors.background,
         }}
-        src={data.profile.photograph}
-        alt={data.profile.firstName}
+        src={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
+        alt="Resume Photograph"
       />
     );
 
   const Profile = () => (
     <div>
-      <h1 className="text-2xl font-bold leading-tight">
-        {data.profile.firstName}
-      </h1>
-      <h1 className="text-2xl font-bold leading-tight">
-        {data.profile.lastName}
-      </h1>
-      <div className="text-xs font-medium mt-2">{data.profile.subtitle}</div>
+      <NamesB data={data} className="text-2xl font-bold leading-tight"/>
+      <SubNamesA data={data} />
+      <div className="text-xs font-medium mt-2">{_.get(data, 'jsonld["@graph"][1].description', "")}</div>
     </div>
   );
 
@@ -90,19 +87,8 @@ const Gengar = () => {
               <Photo />
               <Profile />
             </div>
-
-            {hasAddress(data.profile.address) && (
-              <div className="flex flex-col mt-4 text-xs">
-                <h6 className="font-bold text-xs uppercase tracking-wide mb-1">
-                  {t('shared.forms.address')}
-                </h6>
-                <span>{data.profile.address.line1}</span>
-                <span>{data.profile.address.line2}</span>
-                <span>
-                  {data.profile.address.city} {data.profile.address.pincode}
-                </span>
-              </div>
-            )}
+            
+            <AddressA data={data} mainclassName="flex flex-col mt-4 text-xs" hclassName="font-bold text-xs uppercase tracking-wide mb-1" subclassName="" />
 
             <hr
               className="w-1/4 my-5 opacity-25"
@@ -110,7 +96,7 @@ const Gengar = () => {
             />
 
             <h6 className="font-bold text-xs uppercase tracking-wide mb-2">
-              Contact
+              {data.contacts.heading || "Contact"}
             </h6>
             <ContactB />
           </div>

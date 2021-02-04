@@ -12,6 +12,7 @@ import ProjectsA from '../blocks/Projects/ProjectsA';
 import ReferencesA from '../blocks/References/ReferencesA';
 import SkillsA from '../blocks/Skills/SkillsA';
 import WorkA from '../blocks/Work/WorkA';
+import ObjectiveB from '../blocks/Objective/ObjectiveB';
 
 import PageContext from '../../context/PageContext';
 
@@ -51,19 +52,19 @@ const Pikachu = () => {
         }}
       >
         <div className="grid grid-cols-12 gap-8">
-          {data.profile.photograph && (
+          {_.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' && (
             <div className="self-center col-span-4">
               <img
                 className="w-48 h-48 rounded-full mx-auto object-cover"
-                src={data.profile.photograph}
-                alt={data.profile.firstName}
+                src={_.get(data, 'jsonld["@graph"][1].image.contentUrl', "")}
+                alt="Resume Photograph"
               />
             </div>
           )}
 
           <div
             className={`${
-              data.profile.photograph !== '' ? 'col-span-8' : 'col-span-12'
+              _.get(data, 'jsonld["@graph"][1].image.contentUrl', "") !== '' ? 'col-span-8' : 'col-span-12'
             }`}
           >
             <div
@@ -74,26 +75,13 @@ const Pikachu = () => {
               }}
             >
               <div className="flex flex-col justify-center mx-8 my-6">
-                <h1 className="text-3xl font-bold leading-tight">
-                  {data.profile.firstName} {data.profile.lastName}
-                </h1>
+                <NamesA data={data} className="text-3xl font-bold leading-tight"/>
+                <SubNamesA data={data} />
                 <div className="text-sm font-medium tracking-wide">
-                  {data.profile.subtitle}
+                  {_.get(data, 'jsonld["@graph"][1].description', "")}
                 </div>
 
-                {data.objective.body && (
-                  <div>
-                    <hr
-                      className="my-5 opacity-25"
-                      style={{ borderColor: theme.colors.background }}
-                    />
-
-                    <ReactMarkdown
-                      className="text-sm"
-                      source={data.objective.body}
-                    />
-                  </div>
-                )}
+                <ObjectiveB data={data} />
               </div>
             </div>
           </div>

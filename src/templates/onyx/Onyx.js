@@ -69,9 +69,7 @@ const Onyx = () => {
                 <SubNamesA data={data} />
               <h6 className="font-medium text-sm">{_.get(data, 'jsonld["@graph"][1].description', "")}</h6>
 
-              {hasAddress(data.profile.address) && (
-                <AddressA data={data} mainclassName="flex flex-col mt-4 text-xs" hclassName="font-bold text-xs uppercase tracking-wide mb-1" subclassName="" />
-              )}
+              <AddressA data={data} mainclassName="flex flex-col mt-4 text-xs" hclassName="font-bold text-xs uppercase tracking-wide mb-1" subclassName="" />
             </div>
           </div>
 

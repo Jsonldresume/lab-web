@@ -9,10 +9,10 @@ import Icons from '../Icons';
 import * as _  from 'lodash';
 
 const ContactItem = ({ value, icon, link }) => {
+  const Icon = get(Icons, icon && icon.toLowerCase(), FaCaretRight);
   const context = useContext(AppContext);
   const { state } = context;
   const { data, theme } = state;
-  const Icon = get(Icons, icon && icon.toLowerCase(), FaCaretRight);
 
   return value ? (
     <div className="flex items-center">
@@ -41,22 +41,22 @@ const ContactA = () => {
   return (
     <div className="text-xs grid gap-2">
       <ContactItem
-        label={data.profile.phone.heading || "Phone"}
-        value={data.profile.phone}
+        label={_.get(data,'profile.phone.heading', t("Phone"))}
+        value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")}
         icon="phone"
-        link={`tel:${data.profile.phone}`}
+        link={`tel:${_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")}`}
       />
       <ContactItem
-        label={data.profile.phone.heading || "Website"}
-        value={data.profile.website}
+        label={_.get(data,'profile.website.heading', t("Website"))}
+        value={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")}
         icon="website"
-        link={data.profile.website}
+        link={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")}
       />
       <ContactItem
-        label={data.profile.phone.heading || "Email"}
-        value={data.profile.email}
+        label={_.get(data,'profile.email.heading' ,t("Email"))}
+        value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")}
         icon="email"
-        link={`mailto:${data.profile.email}`}
+        link={`mailto:${_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")}`}
       />
 
       <BirthDateB />

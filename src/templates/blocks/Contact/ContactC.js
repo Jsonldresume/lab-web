@@ -1,6 +1,6 @@
 import React, { memo, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import PageContext from '../../../context/PageContext';
+import AppContext from '../../../context/AppContext';
 import { hasAddress, safetyCheck } from '../../../utils';
 import BirthDateA from '../BirthDate/BirthDateA';
 import AddressA from '../Address/AddressA';
@@ -22,26 +22,28 @@ const ContactItem = ({ value, label, link }) =>
   
 const ContactC = () => {
   const { t } = useTranslation();
-  const { data } = useContext(PageContext);
+  const context = useContext(AppContext);
+  const { state } = context;
+  const { data, theme } = state;
 
   return (
     <div className="text-xs grid gap-2">
         <AddressA data={data} />
 
       <ContactItem
-        label={data.profile.phone.heading || "Phone"}
+        label={_.get(data,'profile.phone.heading', t("Phone"))}
         value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")}
-        link={`tel:${data.profile.phone}`}
+        link={`tel:${_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'telephone', "")}`}
       />
       <ContactItem
-        label={data.profile.phone.heading || "Website"}
+        label={_.get(data,'profile.website.heading', t("Website"))}
         value={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")}
-        link={data.profile.website}
+        link={_.get(data,'jsonld["@graph"][1].sameAs[0]',"")}
       />
       <ContactItem
-        label={data.profile.phone.heading || "Email"}
+        label={_.get(data,'profile.email.heading' ,t("Email"))}
         value={_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")}
-        link={`mailto:${data.profile.email}`}
+        link={`mailto:${_.get(_.find(data.jsonld["@graph"][1].contactPoint,{contactType:"Preferred"}), 'email', "")}`}
       />
 
       <BirthDateA />

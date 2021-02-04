@@ -1,7 +1,6 @@
 import React, { memo, useContext } from 'react';
 import ReactMarkdown from 'react-markdown';
 import PageContext from '../../../context/PageContext';
-import { safetyCheck } from '../../../utils';
 import * as _  from 'lodash';
 
 const ObjectiveA = () => {
