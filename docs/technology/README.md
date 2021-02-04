@@ -4,7 +4,7 @@ title: Technology
 
 # Technology
 
-A credit to all the projects and open source packages that have helped during the building of this project. Truly, without these projects, Reactive Resume wouldn't exist.
+A credit to all the projects and open source packages that have helped during the building of this project. Truly, without these projects, Reactive Resume wouldn't exist, and it was much harder to build jsonldresume lab-web.
 
 ## ReactJS + Hooks 🎉
 
