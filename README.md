@@ -6,6 +6,8 @@
 
 ### [Go to App](https://jsonldresume.github.io/lab-web/)
 
+To test the application, click the ink above, and from the ropdown menu in right panel, select Actions, and then scroll down and click on "Load Data" button to load demo data.
+
 ### What is this app all about?
 
 Jsonld Resume is a free and open source resume builder that’s built to make the mundane tasks of creating, updating and sharing your resume as easy as 1, 2, 3. With this app, you can create resumes that are read-able and index-able by all machine learning algorithms and systems easily and accurately, print as PDF (single-page or multi-page), all for free, no advertisements, without losing the integrity and privacy of your data.
