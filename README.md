@@ -6,7 +6,7 @@
 
 ### [Go to App](https://jsonldresume.github.io/lab-web/)
 
-To test the application, click the ink above, and from the ropdown menu in right panel, select Actions, and then scroll down and click on "Load Data" button to load demo data.
+To test the application, click the link above, and from the dropdown menu in right panel, select "Actions", and then scroll down and click on "Load Data" button to load demo data.
 
 ### What is this app all about?
 
