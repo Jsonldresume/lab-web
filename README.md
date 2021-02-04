@@ -72,7 +72,7 @@ Thank you to all the amazing people who have contributed by translating it into 
 - NodeJS/NPM
 
 This application needs NodeJs to run. You can download and install NodeJs from the below link on any platform if you do not have it already.
-[NodeJS](https://nodejs.org/en/)
+[Download NodeJS](https://nodejs.org/en/)
 
 you can also check if you already have NodeJs installed by running the following two commands in terminal window
 
@@ -82,10 +82,10 @@ npm -v
 ```
 
 - Git
-You also need git to be able to easily download the files from github into our computer (unless in step 1, you prefer to download files manually from this github repository)
-[Git-Scm](https://git-scm.com/downloads)
+You can use git to be able to easily download the files from github into our computer (unless in step 1, you prefer to download files manually from this github repository)
+[Download Git-Scm](https://git-scm.com/downloads)
 
-you can also check if you already have NodeJs installed by running the following command in terminal window
+you can also check whether you already have NodeJs installed by running the following command in terminal window
 
 ```
 git --version
@@ -93,16 +93,16 @@ git --version
 
 ### Building from Source
 
-Want to run your own instance of Json-ld lab-web? You are very much free to do so. Follow 3 easy steps:
+Want to run your own instance of Json-ld lab-web? You are very much free to do so. Follow 3 easy steps. Open cmd (command prompt/terminal) and follow the steps below:
 
-1. First, clone this project repository
+1. First, clone this project repository and go to the cloned folder, by running the below two commands.
 
 ```
 git clone https://github.com/jsonldresume/lab-web.git
 cd lab-web
 ```
 
-2. Run npm install to install dependencies for the project
+2. Run npm install to install dependencies for the project, like below.
 
 ```
 npm install
@@ -110,13 +110,21 @@ npm install
 
 3. Run `npm run start` to run the development server or `npm run build` to build the production app.
 
+```
+npm run start
+```
+
 And that's it! 🎉
 
-### Donation
+### Contribute
 
-I try to do what I can, but if you found the app helpful, please consider donating as little as \$5 to help keep the project alive :)
+I try to do what I can, but if you found the app helpful, please consider contributing to it. Here is a list of TODOs:
 
-#### https://www.buymeacoffee.com/jsonldresume
+1. Remove all json syntaxes and make the data structure totally json-ld. Currently resume data are on json-ld, but theme data are in json.
+
+2. Build more fields to lverage the full power of json-ld. Right now, only a handful of fields are added to the resume, but we can have much more, like the sample json-ld resume you can find under skill repository.
+
+3. Remove warnings. There are a few warnings by node.
 
 ### Appreciation
 
