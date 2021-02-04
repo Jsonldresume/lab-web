@@ -7,7 +7,7 @@ import * as _  from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 const CertificationItem = ({ item, language }) => (
-  <div key={uuidv4()}>
+  <div>
     <div className="flex justify-between items-center">
       <div className="flex flex-col text-left mr-2">
         <h6 className="font-semibold text-sm">{_.get(item, 'educationalLevel', '')} {_.get(item, 'about.educationalCredentialAwarded', '')}</h6>
@@ -33,15 +33,11 @@ const CertificationsA = () => {
     <div>
       <Heading>{data.certifications.heading}</Heading>
       <div className="grid gap-4">
-        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.get(x, 'credentialCategory', '')!=="Degree")).map(CertificationItem)}
-        
-        {data.certifications.items.map((x) => (
-          <CertificationItem
+        {_.get(data, "jsonld['@graph'][1].hasCredential", []).filter(x => (!_.get(x, '@id', '').endsWith("disable") && _.toLower(_.get(x, 'credentialCategory', ''))!=="degree")).map(x=> (<CertificationItem
             key={_.get(x,'@id', uuidv4())}
             item={x}
             language={data.language}
-          />
-        ))}
+          />))}
       </div>
     </div>
   ) : null;

@@ -19,6 +19,7 @@ const ActionsTab = ({ data, theme, dispatch }) => {
   const fileInputRef = useRef(null);
   
   const exportToJsonld = () => {
+    const backupObj = { data, theme };
     let dataclone = _.cloneDeep(data.jsonld);
     let javascript_part1 = '<script type="application/ld+json">'+JSON.stringify(dataclone)+"</script>";
     _.set(dataclone['@graph'][1], "@context", "http://schema.org/");
@@ -27,7 +28,7 @@ const ActionsTab = ({ data, theme, dispatch }) => {
     let javascript = javascript_part1 + javascript_part2;
     var zip = new JSZip();
     zip.file("script.js", javascript);
-    zip.file("resume.json", JSON.stringify(data));
+    zip.file("resume.json", JSON.stringify(backupObj));
     zip.generateAsync({type:"blob"})
     .then(function(content) {
         saveAs(content, "jsonldresume.zip");

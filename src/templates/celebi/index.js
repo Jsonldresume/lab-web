@@ -1,5 +1,5 @@
-import Celebi2 from './Celebi2';
+import Celebi from './Celebi';
 import image from './preview.png';
 
 export const Image = image;
-export default Celebi2;
+export default Celebi;
