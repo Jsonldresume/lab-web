@@ -27,7 +27,7 @@ v13.11.0
 Download the repository as an archive from GitHub, or clone the repository from the command line depending on whether you require the latest updates or not.
 
 ```
-wget https://github.com/AmruthPillai/Reactive-Resume/archive/master.zip
+wget https://github.com/jsonldresume/lab-web/archive/main.zip
 ```
 
 <p style="text-align: center">
@@ -35,8 +35,8 @@ wget https://github.com/AmruthPillai/Reactive-Resume/archive/master.zip
 </p>
 
 ```
-git clone https://github.com/AmruthPillai/Reactive-Resume.git
-cd Reactive-Resume
+git clone https://github.com/jsonldresume/lab-web.git
+cd lab-web
 ```
 
 ### 3. Install Project Dependencies
