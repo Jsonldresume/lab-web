@@ -56,4 +56,4 @@ The web app is responsive, which means you can edit your resume on your phone as
 
 ![](./images/7.png)
 
-As with all my projects, I made the app only to help others, so it will always remain free, and I would not be monetizing on it at any point. But if you do feel generous, [I'm open to donations](https://opencollective.com/reactive-resume).
+As with all my projects, I made the app only to help others, so it will always remain free, and I would not be monetizing on it at any point. But if you do feel generous, please consider contributing to the project.
