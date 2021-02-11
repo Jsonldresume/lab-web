@@ -126,6 +126,8 @@ I try to do what I can, but if you found the app helpful, please consider contri
 
 3. Remove warnings. There are a few warnings by node.
 
+4. There are some erros due to missing fields by google structral data testing tool. Those fields need to be added.
+
 ### Appreciation
 
 Thank you to everyone who made this project possible, including the many users who voiced their opinionsduring Json-ld resume project, and helped us along the way to make this a reality.
