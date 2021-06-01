@@ -91,16 +91,6 @@ you can also check whether you already have NodeJs installed by running the foll
 git --version
 ```
 
-Now you need to install expo-cli. If you want to know more about expo check their website.
-```
-npm install --global expo-cli
-```
-
-Optional: if you prefer yarn you can install yarn.
-```
-npm install --global yarn
-```
-
 ### Building from Source
 
 Want to run your own instance of Json-ld lab-web? You are very much free to do so. Follow 3 easy steps. Open cmd (command prompt/terminal) and follow the steps below:
